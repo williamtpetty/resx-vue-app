@@ -8,6 +8,20 @@
       <p>{{ user.phone_number }}</p>
       <p>{{ user.email }}</p>
       <p>{{ user.city }}, {{ user.state }}</p>
+      <button v-on:click="toggle = !toggle">
+        Show All Listings Information
+      </button>
+      <div v-for="listing in listings" v-bind:key="listing.id">
+        <h3>{{ listing.title }}</h3>
+        <div v-show="toggle">
+          <p>{{ listing.address }}</p>
+          <p>{{ listing.availability }}</p>
+          <p>{{ listing.description }}</p>
+          <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
+            >Full Listing</router-link
+          >
+        </div>
+      </div>
     </div>
   </div>
 </template>
@@ -25,6 +39,8 @@ export default {
     return {
       message: "User Show Page",
       user: {},
+      listings: [],
+      toggle: false,
     };
   },
 
@@ -37,6 +53,7 @@ export default {
       axios.get(`/users/${this.$route.params.id}`).then((response) => {
         console.log(response.data);
         this.user = response.data;
+        this.listings = response.data.listings;
       });
     },
   },

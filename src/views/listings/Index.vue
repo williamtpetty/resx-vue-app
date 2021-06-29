@@ -2,15 +2,14 @@
   <div class="listings">
     <h1>{{ message }}</h1>
     <div v-for="listing in listings" v-bind:key="listing.id">
-      <h2>
-        <router-link v-bind:to="`/listings/${listing.id}`">{{
-          listing.title
-        }}</router-link>
-      </h2>
-      <p>{{ listing.description }}</p>
+      <p>
+        <router-link v-bind:to="`/listings/${listing.id}`"
+          ><img :src="`${listing.images[0].url}`" alt=""
+        /></router-link>
+      </p>
+      <h2>{{ listing.title }}</h2>
       <p><strong>Address: </strong> {{ listing.address }}</p>
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
-      <p><strong>Price: </strong>{{ listing.price }}</p>
       <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
         >More Info</router-link
       >
@@ -18,7 +17,11 @@
   </div>
 </template>
 
-<style></style>
+<style>
+img {
+  max-width: 200px;
+}
+</style>
 
 <script>
 import axios from "axios";
@@ -37,6 +40,7 @@ export default {
   methods: {
     listingsIndex: function () {
       axios.get("/listings").then((response) => {
+        console.log(response.data);
         this.listings = response.data;
       });
     },
