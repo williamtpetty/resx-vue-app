@@ -70,7 +70,7 @@ export default {
         .post("/users", this.newUserParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/"); //needs to push to user/edit page
+          this.$router.push(`/users/${this.newUserParams.id}/edit`); //Need to figure out how to populate the correct user_id on edit page when submitted
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
