@@ -22,8 +22,8 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/users/:id/edit",
-    name: "user-edit",
+    path: "/users/:id/edit/",
+    name: "users-edit",
     component: UserEdit,
   },
   {
@@ -33,7 +33,7 @@ const routes = [
   },
   {
     path: "/users/:id",
-    name: "user-show",
+    name: "users-show",
     component: UserShow,
   },
   {

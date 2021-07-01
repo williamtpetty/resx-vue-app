@@ -51,6 +51,7 @@
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
+    {{ this.newUserParams }}
   </div>
 </template>
 
@@ -70,7 +71,28 @@ export default {
         .post("/users", this.newUserParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push(`/users/${this.newUserParams.id}/edit`); //Need to figure out how to populate the correct user_id on edit page when submitted
+          var params = {
+            email: this.newUserParams.email,
+            password: this.newUserParams.password,
+          };
+          axios
+            .post("/sessions", params)
+            .then((response) => {
+              axios.defaults.headers.common["Authorization"] =
+                "Bearer " + response.data.jwt;
+              localStorage.setItem("jwt", response.data.jwt);
+              // this.$router.push("/listings");
+            })
+            .catch((error) => {
+              console.log(error.response);
+              this.errors = ["Invalid email or password."];
+              this.newUserParams.email = "";
+              this.this.newUserParams.password = "";
+            });
+          this.$router.push({
+            name: "users-edit",
+            params: { id: `${response.data.id}` },
+          });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

@@ -1,7 +1,7 @@
 <template>
-  <div class="user_edit">
+  <div class="user-edit">
     <form v-on:submit.prevent="submitEdit()">
-      <h1>Signup</h1>
+      <h1>User Edit</h1>
 
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
@@ -52,7 +52,7 @@
       <div class="form-group">
         <label>Phone Number: </label>
         <input
-          type="password"
+          type="text"
           class="form-control"
           v-model="editUserParams.phone_number"
         />
@@ -60,37 +60,34 @@
       <div class="form-group">
         <label>Address: </label>
         <input
-          type="password"
+          type="text"
           class="form-control"
           v-model="editUserParams.address"
         />
       </div>
       <div class="form-group">
         <label>City: </label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="editUserParams.city"
-        />
+        <input type="text" class="form-control" v-model="editUserParams.city" />
       </div>
       <div class="form-group">
         <label>State: </label>
         <input
-          type="password"
+          type="text"
           class="form-control"
-          v-model="editUserParams.password_confirmation"
+          v-model="editUserParams.state"
         />
       </div>
       <div class="form-group">
         <label>Tell us about you: </label>
-        <input
+        <textarea
           type="password"
           class="form-control"
           v-model="editUserParams.about_me"
-        />
+        ></textarea>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
+    {{ editUserParams }}
   </div>
 </template>
 
@@ -110,7 +107,10 @@ export default {
         .patch(`/users/${this.$route.params.id}`, this.editUserParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/");
+          this.$router.push({
+            name: "users-edit",
+            params: { id: `${response.data.id}` },
+          });
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

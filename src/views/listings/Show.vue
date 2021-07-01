@@ -12,7 +12,7 @@
       <p><strong>Price: </strong>{{ listing.price }}</p>
     </div>
     <div>
-      <strong>Contact Info:</strong>
+      <strong>Listing User:</strong>
       <p>
         <router-link v-bind:to="`/users/${user.id}`">
           {{ user.first_name }}

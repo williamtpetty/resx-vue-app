@@ -1,5 +1,5 @@
 <template>
-  <div class="user-show">
+  <div class="users-show">
     <h1>{{ message }}</h1>
     <div>
       <img :src="`${user.image_url}`" alt="" />
@@ -8,6 +8,10 @@
       <p>{{ user.phone_number }}</p>
       <p>{{ user.email }}</p>
       <p>{{ user.city }}, {{ user.state }}</p>
+      <router-link :to="`/users/${user.id}/edit`" tag="button"
+        >Edit User Info</router-link
+      >
+      <br />
       <button v-on:click="toggle = !toggle">
         Show All Listings Information
       </button>
