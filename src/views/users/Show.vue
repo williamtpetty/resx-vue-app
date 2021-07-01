@@ -49,11 +49,11 @@ export default {
   },
 
   created: function () {
-    this.userShow();
+    this.showUser();
   },
 
   methods: {
-    userShow: function () {
+    showUser: function () {
       axios.get(`/users/${this.$route.params.id}`).then((response) => {
         console.log(response.data);
         this.user = response.data;

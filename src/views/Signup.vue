@@ -81,7 +81,12 @@ export default {
               axios.defaults.headers.common["Authorization"] =
                 "Bearer " + response.data.jwt;
               localStorage.setItem("jwt", response.data.jwt);
-              // this.$router.push("/listings");
+              //stores user_id from sessions response.data
+              localStorage.setItem("user_id", response.data.user_id);
+              //uses localStorage.getItem to retrieve the id
+              this.$router.push(
+                `/users/${localStorage.getItem("user_id")}/edit`
+              );
             })
             .catch((error) => {
               console.log(error.response);
@@ -89,10 +94,7 @@ export default {
               this.newUserParams.email = "";
               this.this.newUserParams.password = "";
             });
-          this.$router.push({
-            name: "users-edit",
-            params: { id: `${response.data.id}` },
-          });
+          // this.$router.push("/listings");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

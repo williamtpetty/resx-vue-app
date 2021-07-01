@@ -1,6 +1,6 @@
 <template>
-  <div class="user-edit">
-    <form v-on:submit.prevent="submitEdit()">
+  <div class="users-edit">
+    <form v-on:submit.prevent="editUser()">
       <h1>User Edit</h1>
 
       <ul>
@@ -101,8 +101,20 @@ export default {
       errors: [],
     };
   },
+
+  created: function () {
+    this.showUser();
+  },
+
   methods: {
-    submitEdit: function () {
+    showUser: function () {
+      axios.get(`/users/${this.$route.params.id}`).then((response) => {
+        console.log(response.data);
+        this.editUserParams = response.data;
+      });
+    },
+
+    editUser: function () {
       axios
         .patch(`/users/${this.$route.params.id}`, this.editUserParams)
         .then((response) => {
