@@ -6,6 +6,7 @@ import Logout from "../views/Logout.vue";
 import UserShow from "../views/users/Show.vue";
 import UserEdit from "../views/users/Edit.vue";
 import Listings from "../views/listings/Index.vue";
+import ListingsNew from "../views/listings/New.vue";
 import ListingsShow from "../views/listings/Show.vue";
 
 Vue.use(VueRouter);
@@ -40,6 +41,11 @@ const routes = [
     path: "/listings",
     name: "listings",
     component: Listings,
+  },
+  {
+    path: "/listings/new",
+    name: "listings-new",
+    component: ListingsNew,
   },
   {
     path: "/listings/:id",
