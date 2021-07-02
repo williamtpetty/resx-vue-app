@@ -22,6 +22,9 @@
       <p>{{ user.phone_number }}</p>
       <p>{{ user.email }}</p>
     </div>
+    <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
+      >Edit Listing</router-link
+    >
   </div>
 </template>
 
@@ -50,10 +53,10 @@ export default {
   methods: {
     listingsShow: function () {
       axios.get(`/listings/${this.$route.params.id}`).then((response) => {
-        console.log(response.data);
         this.listing = response.data;
         this.images = response.data.images;
         this.user = response.data.user;
+        console.log(this.images);
       });
     },
   },

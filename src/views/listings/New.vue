@@ -74,7 +74,7 @@ export default {
         .post(`/listings`, this.newListingParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push("/listings");
+          this.$router.push(`/listings/${response.data.id}/edit`);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
