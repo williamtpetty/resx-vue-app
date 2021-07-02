@@ -52,6 +52,7 @@ export default {
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
+    isUserHost: function () {},
   },
 };
 </script>

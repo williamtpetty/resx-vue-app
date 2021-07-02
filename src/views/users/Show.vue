@@ -12,18 +12,27 @@
         >Edit User Info</router-link
       >
       <br />
-      <button v-on:click="toggle = !toggle">
-        Show All Listings Information
-      </button>
-      <div v-for="listing in listings" v-bind:key="listing.id">
-        <h3>{{ listing.title }}</h3>
-        <div v-show="toggle">
-          <p>{{ listing.address }}</p>
-          <p>{{ listing.availability }}</p>
-          <p>{{ listing.description }}</p>
-          <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
-            >Full Listing</router-link
-          >
+      <router-link
+        v-if="`${user.host}` === 'true'"
+        to="/listings/new"
+        tag="button"
+        >New Listing</router-link
+      >
+      <br />
+      <div v-if="`${user.host}` === 'true'">
+        <button v-on:click="toggle = !toggle">
+          Show All Listings Information
+        </button>
+        <div v-for="listing in listings" v-bind:key="listing.id">
+          <h3>{{ listing.title }}</h3>
+          <div v-show="toggle">
+            <p>{{ listing.address }}</p>
+            <p>{{ listing.availability }}</p>
+            <p>{{ listing.description }}</p>
+            <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
+              >Full Listing</router-link
+            >
+          </div>
         </div>
       </div>
     </div>

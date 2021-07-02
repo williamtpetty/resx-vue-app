@@ -85,33 +85,6 @@
           v-model="editUserParams.about_me"
         ></textarea>
       </div>
-      <div class="form-group">
-        <label>Picture: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="editUserParams.image_url"
-        />
-      </div>
-      <div class="form-group">
-        <label for="true">Are you planning to host?</label>
-        <br />
-        <label>Yes</label>
-        <input
-          type="radio"
-          class="form-control"
-          v-model="editUserParams.host"
-          value="true"
-        />
-        <br />
-        <label for="false">No</label>
-        <input
-          type="radio"
-          class="form-control"
-          v-model="editUserParams.host"
-          value="false"
-        />
-      </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
     {{ editUserParams }}
@@ -147,7 +120,7 @@ export default {
         .then((response) => {
           console.log(response.data);
           this.$router.push({
-            name: "users-show",
+            name: "users-edit",
             params: { id: `${response.data.id}` },
           });
         })
