@@ -1,7 +1,7 @@
 <template>
-  <div class="users-edit">
-    <form v-on:submit.prevent="editUser()">
-      <h1>User Edit</h1>
+  <div class="listings-new">
+    <form v-on:submit.prevent="editListing()">
+      <h1>Edit Listing</h1>
 
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
@@ -10,84 +10,54 @@
       </ul>
 
       <div class="form-group">
-        <label>First Name: </label>
+        <label>Title: </label>
         <input
           type="text"
           class="form-control"
-          v-model="editUserParams.first_name"
+          v-model="editListingParams.title"
         />
       </div>
       <div class="form-group">
-        <label>Last Name: </label>
-        <input
+        <label>Description </label>
+        <textarea
           type="text"
           class="form-control"
-          v-model="editUserParams.last_name"
-        />
-      </div>
-      <div class="form-group">
-        <label>Email: </label>
-        <input
-          type="email"
-          class="form-control"
-          v-model="editUserParams.email"
-        />
-      </div>
-      <div class="form-group">
-        <label>Password: </label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="editUserParams.password"
-        />
-      </div>
-      <div class="form-group">
-        <label>Password confirmation: </label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="editUserParams.password_confirmation"
-        />
-      </div>
-      <div class="form-group">
-        <label>Phone Number: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="editUserParams.phone_number"
-        />
+          v-model="editListingParams.description"
+        ></textarea>
       </div>
       <div class="form-group">
         <label>Address: </label>
         <input
           type="text"
           class="form-control"
-          v-model="editUserParams.address"
+          v-model="editListingParams.address"
         />
       </div>
       <div class="form-group">
-        <label>City: </label>
-        <input type="text" class="form-control" v-model="editUserParams.city" />
+        <label>Availability: </label>
+        <textarea
+          type="text"
+          class="form-control"
+          v-model="editListingParams.availability"
+        ></textarea>
       </div>
       <div class="form-group">
-        <label>State: </label>
+        <label>Price: </label>
         <input
           type="text"
           class="form-control"
-          v-model="editUserParams.state"
+          v-model="editListingParams.price"
         />
-      </div>
-      <div class="form-group">
-        <label>Tell us about you: </label>
-        <textarea
-          type="password"
-          class="form-control"
-          v-model="editUserParams.about_me"
-        ></textarea>
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
-    {{ editUserParams }}
+    <div>
+      <label>Image: </label>
+      <input type="text" v-model="newImage.url" />
+      <br />
+      <button v-on:click="addImage()">Add Image</button>
+    </div>
+    {{ newImage }}
   </div>
 </template>
 
@@ -97,35 +67,46 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      editUserParams: {},
+      editListingParams: {},
       errors: [],
+      images: [],
+      newImage: {},
+      listingId: "",
     };
   },
 
   created: function () {
-    this.showUser();
+    this.showListing();
   },
 
   methods: {
-    showUser: function () {
-      axios.get(`/users/${this.$route.params.id}`).then((response) => {
+    showListing: function () {
+      axios.get(`/listings/${this.$route.params.id}`).then((response) => {
         console.log(response.data);
-        this.editUserParams = response.data;
+        this.editListingParams = response.data;
+        this.listingId = response.data.id;
       });
     },
 
-    editUser: function () {
+    editListing: function () {
       axios
-        .patch(`/users/${this.$route.params.id}`, this.editUserParams)
+        .patch(`/users/${this.$route.params.id}`, this.editListingParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push({
-            name: "users-edit",
-            params: { id: `${response.data.id}` },
-          });
+          this.$router.push("/listings");
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+        });
+    },
+
+    addImage: function () {
+      axios
+        .post(`/images`, { listing_id: this.listingId, url: this.newImage.url })
+        .then((response) => {
+          console.log(response.data);
+          this.images = response.data;
+          this.newImage = {};
         });
     },
   },
