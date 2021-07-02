@@ -32,6 +32,10 @@
             <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
               >Full Listing</router-link
             >
+            <br />
+            <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
+              >Edit Listing</router-link
+            >
           </div>
         </div>
       </div>

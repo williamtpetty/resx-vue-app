@@ -8,6 +8,7 @@ import UserEdit from "../views/users/Edit.vue";
 import Listings from "../views/listings/Index.vue";
 import ListingsNew from "../views/listings/New.vue";
 import ListingsShow from "../views/listings/Show.vue";
+import ListingsEdit from "../views/listings/Edit.vue";
 
 Vue.use(VueRouter);
 
@@ -23,7 +24,7 @@ const routes = [
     component: Signup,
   },
   {
-    path: "/users/:id/edit/",
+    path: "/users/:id/edit",
     name: "users-edit",
     component: UserEdit,
   },
@@ -46,6 +47,11 @@ const routes = [
     path: "/listings/new",
     name: "listings-new",
     component: ListingsNew,
+  },
+  {
+    path: "/listings/:id/edit",
+    name: "listings-edit",
+    component: ListingsEdit,
   },
   {
     path: "/listings/:id",
