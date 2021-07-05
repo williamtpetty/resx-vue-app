@@ -5,8 +5,7 @@
       <img :src="`${user.image_url}`" alt="" />
       <h2>{{ user.first_name }} {{ user.last_name }}</h2>
       <p>{{ user.about_me }}</p>
-      <p>{{ user.phone_number }}</p>
-      <p>{{ user.email }}</p>
+      <a :href="`mailto:${user.email}`">Email this Host</a>
       <p>{{ user.city }}, {{ user.state }}</p>
       <router-link :to="`/users/${user.id}/edit`" tag="button"
         >Edit User Info</router-link

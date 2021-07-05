@@ -19,8 +19,10 @@
           {{ user.last_name }}</router-link
         >
       </p>
-      <p>{{ user.phone_number }}</p>
-      <p>{{ user.email }}</p>
+      <a
+        :href="`mailto:${user.email}?subject=Interested in: ${listing.address}`"
+        >Email Host to Reserve Date!</a
+      >
     </div>
     <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
       >Edit Listing</router-link

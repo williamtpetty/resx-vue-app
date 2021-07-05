@@ -1,14 +1,41 @@
 <template>
   <div class="listings">
     <h1>{{ message }}</h1>
-    <div v-for="listing in listings" v-bind:key="listing.id">
+    <datalist>
+      <option v-for="listing in listings" v-bind:key="listing.id">
+        {{ listing.address }}
+      </option>
+    </datalist>
+
+    <div>
+      <label>Search by Address: </label>
+      <br />
+      <input
+        type="text"
+        v-model="searchTerm"
+        list="address"
+        placeholder="Search by Address"
+      />
+    </div>
+    <br />
+
+    <button v-on:click="sortByAttribute('title')">Sort by Title</button>
+    <button v-on:click="sortByAttribute('created_at')">Sort by Age</button>
+
+    <div
+      v-for="listing in filterBy(
+        orderBy(listings, sortAttribute, sortDirection),
+        searchTerm
+      )"
+      v-bind:key="listing.id"
+    >
+      <h2>{{ listing.title }}</h2>
       <p>
         <router-link v-bind:to="`/listings/${listing.id}`"
           ><img :src="`${listing.images[0].url}`" alt=""
         /></router-link>
       </p>
-      <h2>{{ listing.title }}</h2>
-      <!-- <p><strong>Address: </strong> {{ listing.address }}</p> -->
+      <p><strong>Address: </strong> {{ listing.address }}</p>
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
       <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
         >More Info</router-link
@@ -25,11 +52,18 @@ img {
 
 <script>
 import axios from "axios";
+import Vue2Filters from "vue2-filters";
+
 export default {
+  mixins: [Vue2Filters.mixin],
+
   data: function () {
     return {
       message: "Listings",
       listings: [],
+      sortAttribute: "",
+      sortDirection: 1,
+      searchTerm: "",
     };
   },
 
@@ -43,6 +77,15 @@ export default {
         console.log(response.data);
         this.listings = response.data;
       });
+    },
+
+    sortByAttribute: function (attribute) {
+      if (this.sortAttribute === attribute) {
+        this.sortDirection = this.sortDirection * -1;
+      } else {
+        this.sortAttribute = attribute;
+        this.sortDirection = this.sortDirection * -1;
+      }
     },
   },
 };
