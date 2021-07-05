@@ -52,12 +52,18 @@ export default {
 
   methods: {
     listingsShow: function () {
-      axios.get(`/listings/${this.$route.params.id}`).then((response) => {
-        this.listing = response.data;
-        this.images = response.data.images;
-        this.user = response.data.user;
-        console.log(this.images);
-      });
+      axios
+        .get(`/listings/${this.$route.params.id}`)
+        .then((response) => {
+          this.listing = response.data;
+          this.images = response.data.images;
+          this.user = response.data.user;
+          console.log(this.images);
+        })
+        .catch((error) => {
+          console.log(error.response.status);
+          this.$router.push("/");
+        });
     },
   },
 };
