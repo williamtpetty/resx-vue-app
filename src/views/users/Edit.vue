@@ -114,7 +114,9 @@
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
-    {{ editUserParams }}
+    <div>
+      <button v-on:click="destroyUser()">Delete User</button>
+    </div>
   </div>
 </template>
 
@@ -154,6 +156,22 @@ export default {
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
+    },
+
+    destroyUser: function () {
+      if (confirm("Are you sure you want to leave us?"))
+        axios
+          .delete(`/users/${this.$route.params.id}`)
+          .then((response) => {
+            console.log(response);
+            delete axios.defaults.headers.common["Authorization"];
+            localStorage.removeItem("jwt");
+            localStorage.removeItem("user_id");
+            this.$router.push("/signup");
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
     },
   },
 };

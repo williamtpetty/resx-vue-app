@@ -52,6 +52,9 @@
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form>
     <div>
+      <button v-on:click="destroyListing()">Delete Listing</button>
+    </div>
+    <div>
       <label>Image: </label>
       <input type="text" v-model="newImage.url" />
       <br />
@@ -108,6 +111,19 @@ export default {
           this.images = response.data;
           this.newImage = {};
         });
+    },
+
+    destroyListing: function () {
+      if (confirm("Are you sure you want to delete this listing?"))
+        axios
+          .delete(`/listings/${this.$route.params.id}`)
+          .then((response) => {
+            console.log(response);
+            this.$router.push("/listings");
+          })
+          .catch((error) => {
+            console.log(error.response);
+          });
     },
   },
 };

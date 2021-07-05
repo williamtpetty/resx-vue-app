@@ -8,7 +8,7 @@
         /></router-link>
       </p>
       <h2>{{ listing.title }}</h2>
-      <p><strong>Address: </strong> {{ listing.address }}</p>
+      <!-- <p><strong>Address: </strong> {{ listing.address }}</p> -->
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
       <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
         >More Info</router-link

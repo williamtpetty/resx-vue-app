@@ -5,7 +5,7 @@
         >Profile</router-link
       >
       <span v-if="isLoggedIn()"> | </span>
-      <router-link v-if="!isLoggedIn()" to="/">Home</router-link>
+      <router-link v-if="!isLoggedIn()" to="/">Login</router-link>
       <span v-if="!isLoggedIn()"> | </span>
       <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
       <span v-if="isLoggedIn()"> | </span>
@@ -52,7 +52,6 @@ export default {
     getUserId: function () {
       return localStorage.getItem("user_id");
     },
-    isUserHost: function () {},
   },
 };
 </script>
