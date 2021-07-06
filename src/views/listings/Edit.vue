@@ -62,7 +62,7 @@
       <p v-for="image in images" v-bind:key="image.id">
         <img :src="`${image.url}`" alt="" />
         <br />
-        <button v-on:click="deleteImage(image.id)">Delete Image</button>
+        <button v-on:click="destroyImage(image.id)">Delete Image</button>
       </p>
     </div>
   </div>
@@ -79,7 +79,6 @@ export default {
       images: [],
       newImage: {},
       listingId: "",
-
       indexVal: "",
     };
   },
@@ -128,7 +127,7 @@ export default {
         });
     },
 
-    deleteImage: function (imageId) {
+    destroyImage: function (imageId) {
       if (confirm("Are you sure you want to delete this image?"))
         axios
           .delete(`/images/${imageId}`)

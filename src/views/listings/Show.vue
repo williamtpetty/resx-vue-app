@@ -25,7 +25,10 @@
         >Email Host to Reserve Date!</a
       >
     </div>
-    <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
+    <router-link
+      v-if="`${this.currentUserId}` == `${user.id}`"
+      v-bind:to="`/listings/${listing.id}/edit`"
+      tag="button"
       >Edit Listing</router-link
     >
   </div>
@@ -34,6 +37,12 @@
 <style>
 img {
   max-width: 350px;
+}
+
+#map {
+  max-width: 500px;
+  height: 500px;
+  margin: auto;
 }
 </style>
 
@@ -48,6 +57,7 @@ export default {
       listing: {},
       images: [],
       user: {},
+      currentUserId: localStorage.getItem("user_id"),
     };
   },
 
@@ -56,8 +66,6 @@ export default {
   },
 
   mounted: function () {
-    // var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
-
     mapboxgl.accessToken =
       "pk.eyJ1Ijoid2lsbGlhbXRwZXR0eSIsImEiOiJja3B6d2t4YTIwN2JoMnR0bHliNnlhN3JxIn0.6ldMEPx_v-r54M-OZ_QCeQ";
     new mapboxgl.Map({

@@ -7,19 +7,25 @@
       <p>{{ user.about_me }}</p>
       <a :href="`mailto:${user.email}`">Email this Host</a>
       <p>{{ user.city }}, {{ user.state }}</p>
-      <router-link :to="`/users/${user.id}/edit`" tag="button"
+
+      <router-link
+        v-if="`${user.id}` === `${currentUserId}`"
+        :to="`/users/${user.id}/edit`"
+        tag="button"
         >Edit User Info</router-link
       >
+
       <br />
       <router-link
-        v-if="`${user.host}` === 'true'"
+        v-if="`${user.host}` === 'true' && `${user.id}` === `${currentUserId}`"
         to="/listings/new"
         tag="button"
         >New Listing</router-link
       >
       <br />
-      <div v-if="`${user.host}` === 'true'">
-        <button v-on:click="toggle = !toggle">
+
+      <div>
+        <button v-if="`${user.host}` === 'true'" v-on:click="toggle = !toggle">
           Show All Listings Information
         </button>
         <div v-for="listing in listings" v-bind:key="listing.id">
@@ -32,9 +38,13 @@
               >Full Listing</router-link
             >
             <br />
-            <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
-              >Edit Listing</router-link
-            >
+            <div v-if="`${user.id}` === `${currentUserId}`">
+              <router-link
+                v-bind:to="`/listings/${listing.id}/edit`"
+                tag="button"
+                >Edit Listing</router-link
+              >
+            </div>
           </div>
         </div>
       </div>
@@ -57,6 +67,7 @@ export default {
       user: {},
       listings: [],
       toggle: false,
+      currentUserId: localStorage.getItem("user_id"),
     };
   },
 
@@ -67,9 +78,9 @@ export default {
   methods: {
     showUser: function () {
       axios.get(`/users/${this.$route.params.id}`).then((response) => {
-        console.log(response.data);
         this.user = response.data;
         this.listings = response.data.listings;
+        console.log(this.user);
       });
     },
   },
