@@ -11,7 +11,28 @@
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
       <p><strong>Price: </strong>{{ listing.price }}</p>
     </div>
-    <div id="map">this is where the</div>
+
+    <!-- div id="map" renders container: map from code below-->
+    <h4>Pin below marks location</h4>
+    <div id="map"></div>
+
+    <!-- begin the map menu -->
+    <div id="menu">
+      <input
+        id="satellite-v9"
+        type="radio"
+        name="rtoggle"
+        value="satellite"
+        checked="checked"
+      />
+      <!-- See a list of Mapbox-hosted public styles at -->
+      <!-- https://docs.mapbox.com/api/maps/styles/#mapbox-styles -->
+      <label for="satellite-v9">satellite</label>
+      <input id="streets-v11" type="radio" name="rtoggle" value="streets" />
+      <label for="streets-v11">streets</label>
+    </div>
+    <!-- end the map menu -->
+
     <div>
       <strong>Listing User:</strong>
       <p>
@@ -54,7 +75,7 @@ export default {
   data: function () {
     return {
       message: "Listing Show Page",
-      listing: {},
+      listing: [],
       images: [],
       user: {},
       currentUserId: localStorage.getItem("user_id"),
@@ -65,31 +86,54 @@ export default {
     this.listingsShow();
   },
 
-  mounted: function () {
-    mapboxgl.accessToken =
-      "pk.eyJ1Ijoid2lsbGlhbXRwZXR0eSIsImEiOiJja3B6d2t4YTIwN2JoMnR0bHliNnlhN3JxIn0.6ldMEPx_v-r54M-OZ_QCeQ";
-    new mapboxgl.Map({
-      container: "map",
-      style: "mapbox://styles/mapbox/satellite-v9",
-      center: [-90.555051, 35.267242],
-      zoom: 9,
-    });
-    // var map =
-  },
-
   methods: {
     listingsShow: function () {
       axios
         .get(`/listings/${this.$route.params.id}`)
         .then((response) => {
+          console.log(response.data);
           this.listing = response.data;
           this.images = response.data.images;
           this.user = response.data.user;
-          console.log(this.images);
+
+          // begin map code
+          mapboxgl.accessToken =
+            "pk.eyJ1Ijoid2lsbGlhbXRwZXR0eSIsImEiOiJja3B6d2t4YTIwN2JoMnR0bHliNnlhN3JxIn0.6ldMEPx_v-r54M-OZ_QCeQ";
+          var map = new mapboxgl.Map({
+            container: "map",
+            style: "mapbox://styles/mapbox/satellite-v9",
+            center: [this.listing.longitude, this.listing.latitude],
+            zoom: 11,
+          });
+          //end map code
+
+          // begin popup/marker
+          var popup = new mapboxgl.Popup({ offset: 25 }).setText(
+            `${this.listing.address}`
+          );
+          var marker1 = new mapboxgl.Marker({ draggable: false })
+            .setLngLat([this.listing.longitude, this.listing.latitude])
+            .setPopup(popup)
+            .addTo(map);
+          console.log(marker1);
+          // end map and popup/marker
+
+          // Start JS code to render style menu
+          var layerList = document.getElementById("menu");
+          var inputs = layerList.getElementsByTagName("input");
+
+          function switchLayer(layer) {
+            var layerId = layer.target.id;
+            map.setStyle("mapbox://styles/mapbox/" + layerId);
+          }
+
+          for (var i = 0; i < inputs.length; i++) {
+            inputs[i].onclick = switchLayer;
+          }
+          // End JS code rendering style menu
         })
         .catch((error) => {
-          console.log(error.response.status);
-          this.$router.push("/");
+          console.log(error.response);
         });
     },
   },
