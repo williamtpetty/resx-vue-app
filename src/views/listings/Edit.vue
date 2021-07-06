@@ -61,6 +61,8 @@
       <button v-on:click="addImage()">Add Image</button>
       <p v-for="image in images" v-bind:key="image.id">
         <img :src="`${image.url}`" alt="" />
+        <br />
+        <button v-on:click="deleteImage(image.id)">Delete Image</button>
       </p>
     </div>
   </div>
@@ -77,7 +79,7 @@ export default {
       images: [],
       newImage: {},
       listingId: "",
-      imageID: "",
+
       indexVal: "",
     };
   },
@@ -88,12 +90,17 @@ export default {
 
   methods: {
     showListing: function () {
-      axios.get(`/listings/${this.$route.params.id}`).then((response) => {
-        console.log(response.data);
-        this.editListingParams = response.data;
-        this.images = response.data.images;
-        this.listingId = response.data.id;
-      });
+      axios
+        .get(`/listings/${this.$route.params.id}`)
+        .then((response) => {
+          console.log(response.data);
+          this.editListingParams = response.data;
+          this.images = response.data.images;
+          this.listingId = response.data.id;
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
 
     editListing: function () {
@@ -115,13 +122,23 @@ export default {
           console.log(response.data);
           this.newImage = {};
           this.$router.push(`/listings/${response.data.listing_id}/edit`);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
         });
     },
 
-    // showImage: function () {
-    //   axios.get(`/images/${}`).then((response) => {
-    //   });
-    // },
+    deleteImage: function (imageId) {
+      if (confirm("Are you sure you want to delete this image?"))
+        axios
+          .delete(`/images/${imageId}`)
+          .then((response) => {
+            console.log(response.data);
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+          });
+    },
 
     destroyListing: function () {
       if (confirm("Are you sure you want to delete this listing?"))
