@@ -8,19 +8,36 @@
     </datalist>
 
     <div>
-      <label>Search by Address: </label>
+      <label>Search by Keyword: </label>
       <br />
       <input
         type="text"
         v-model="searchTerm"
         list="address"
-        placeholder="Search by Address"
+        placeholder="Keyword"
       />
     </div>
     <br />
 
-    <button v-on:click="sortByAttribute('title')">Sort by Title</button>
-    <button v-on:click="sortByAttribute('created_at')">Sort by Age</button>
+    <button v-on:click="sortByAttribute('title')">
+      Sort by Title
+      <span v-if="this.sortAttribute == 'title' && this.sortDirection == -1"
+        >v</span
+      >
+      <span v-if="this.sortAttribute == 'title' && this.sortDirection == 1"
+        >^</span
+      >
+    </button>
+    <button v-on:click="sortByAttribute('created_at')">
+      Sort by Age
+      <span
+        v-if="this.sortAttribute == 'created_at' && this.sortDirection == -1"
+        >v</span
+      >
+      <span v-if="this.sortAttribute == 'created_at' && this.sortDirection == 1"
+        >^</span
+      >
+    </button>
 
     <div
       v-for="listing in filterBy(
@@ -30,7 +47,7 @@
       v-bind:key="listing.id"
     >
       <h2>{{ listing.title }}</h2>
-      <p>
+      <p v-if="`${listing.images}` === 'true'">
         <router-link v-bind:to="`/listings/${listing.id}`"
           ><img :src="`${listing.images[0].url}`" alt=""
         /></router-link>
@@ -61,7 +78,7 @@ export default {
     return {
       message: "Listings",
       listings: [],
-      sortAttribute: "",
+      sortAttribute: "created_at",
       sortDirection: 1,
       searchTerm: "",
     };
@@ -80,7 +97,7 @@ export default {
     },
 
     sortByAttribute: function (attribute) {
-      if (this.sortAttribute === attribute) {
+      if (this.sortAttribute == attribute) {
         this.sortDirection = this.sortDirection * -1;
       } else {
         this.sortAttribute = attribute;

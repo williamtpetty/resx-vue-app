@@ -59,8 +59,10 @@
       <input type="text" v-model="newImage.url" />
       <br />
       <button v-on:click="addImage()">Add Image</button>
+      <p v-for="image in images" v-bind:key="image.id">
+        <img :src="`${image.url}`" alt="" />
+      </p>
     </div>
-    {{ newImage }}
   </div>
 </template>
 
@@ -75,6 +77,8 @@ export default {
       images: [],
       newImage: {},
       listingId: "",
+      imageID: "",
+      indexVal: "",
     };
   },
 
@@ -87,13 +91,14 @@ export default {
       axios.get(`/listings/${this.$route.params.id}`).then((response) => {
         console.log(response.data);
         this.editListingParams = response.data;
+        this.images = response.data.images;
         this.listingId = response.data.id;
       });
     },
 
     editListing: function () {
       axios
-        .patch(`/users/${this.$route.params.id}`, this.editListingParams)
+        .patch(`/listings/${this.$route.params.id}`, this.editListingParams)
         .then((response) => {
           console.log(response.data);
           this.$router.push("/listings");
@@ -108,10 +113,15 @@ export default {
         .post(`/images`, { listing_id: this.listingId, url: this.newImage.url })
         .then((response) => {
           console.log(response.data);
-          this.images = response.data;
           this.newImage = {};
+          this.$router.push(`/listings/${response.data.listing_id}/edit`);
         });
     },
+
+    // showImage: function () {
+    //   axios.get(`/images/${}`).then((response) => {
+    //   });
+    // },
 
     destroyListing: function () {
       if (confirm("Are you sure you want to delete this listing?"))
