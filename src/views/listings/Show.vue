@@ -11,6 +11,7 @@
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
       <p><strong>Price: </strong>{{ listing.price }}</p>
     </div>
+    <div id="map">this is where the</div>
     <div>
       <strong>Listing User:</strong>
       <p>
@@ -40,7 +41,9 @@ img {
 </style>
 
 <script>
+/* global mapboxgl */
 import axios from "axios";
+
 export default {
   data: function () {
     return {
@@ -54,6 +57,20 @@ export default {
 
   created: function () {
     this.listingsShow();
+  },
+
+  mounted: function () {
+    // var mapboxgl = require("mapbox-gl/dist/mapbox-gl.js");
+
+    mapboxgl.accessToken =
+      "pk.eyJ1Ijoid2lsbGlhbXRwZXR0eSIsImEiOiJja3B6d2t4YTIwN2JoMnR0bHliNnlhN3JxIn0.6ldMEPx_v-r54M-OZ_QCeQ";
+    new mapboxgl.Map({
+      container: "map",
+      style: "mapbox://styles/mapbox/satellite-v9",
+      center: [-90.555051, 35.267242],
+      zoom: 9,
+    });
+    // var map =
   },
 
   methods: {
