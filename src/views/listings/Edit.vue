@@ -1,6 +1,6 @@
 <template>
   <div class="listings-new">
-    <form v-on:submit.prevent="editListing()">
+    <form>
       <h1>Edit Listing</h1>
 
       <ul>
@@ -58,12 +58,14 @@
       <label>Image: </label>
       <input type="text" v-model="newImage.url" />
       <br />
-      <button v-on:click="addImage()">Add Image</button>
-      <p v-for="image in images" v-bind:key="image.id">
-        <img :src="`${image.url}`" alt="" />
-        <br />
-        <button v-on:click="destroyImage(image.id)">Delete Image</button>
-      </p>
+      <button v-on:click="addImage(newImage)">Add Image</button>
+      <div v-for="image in images" v-bind:key="image.id">
+        <p>
+          <img :src="`${image.url}`" alt="" />
+          <br />
+          <button v-on:click="destroyImage(image)">Delete Image</button>
+        </p>
+      </div>
     </div>
   </div>
 </template>
@@ -77,9 +79,8 @@ export default {
       editListingParams: {},
       errors: [],
       images: [],
-      newImage: {},
+      newImage: { url: "https://via.placeholder.com/300" },
       listingId: "",
-      indexVal: "",
     };
   },
 
@@ -92,7 +93,7 @@ export default {
       axios
         .get(`/listings/${this.$route.params.id}`)
         .then((response) => {
-          console.log(response.data);
+          // console.log(response.data);
           this.editListingParams = response.data;
           this.images = response.data.images;
           this.listingId = response.data.id;
@@ -114,24 +115,28 @@ export default {
         });
     },
 
-    addImage: function () {
+    addImage: function (addOneImage) {
       axios
         .post(`/images`, { listing_id: this.listingId, url: this.newImage.url })
         .then((response) => {
+          this.images.push(addOneImage);
           console.log(response.data);
           this.newImage = {};
-          this.$router.push(`/listings/${response.data.listing_id}/edit`);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
         });
     },
 
-    destroyImage: function (imageId) {
+    destroyImage: function (deleteThisImage) {
+      var imageIndex = this.images.indexOf(deleteThisImage);
+      console.log(imageIndex);
+      console.log(deleteThisImage.id);
       if (confirm("Are you sure you want to delete this image?"))
         axios
-          .delete(`/images/${imageId}`)
+          .delete(`/images/${deleteThisImage.id}`)
           .then((response) => {
+            this.images.splice(imageIndex, 1);
             console.log(response.data);
           })
           .catch((error) => {
