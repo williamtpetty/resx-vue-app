@@ -24,7 +24,10 @@
         >Email Host to Reserve Date!</a
       >
     </div>
-    <router-link v-bind:to="`/listings/${listing.id}/edit`" tag="button"
+    <router-link
+      v-if="`${user.id}` == `${this.loggedInUser}`"
+      v-bind:to="`/listings/${listing.id}/edit`"
+      tag="button"
       >Edit Listing</router-link
     >
   </div>
@@ -45,6 +48,7 @@ export default {
       listing: {},
       images: [],
       user: {},
+      loggedInUser: localStorage.getItem("user_id"),
     };
   },
 
@@ -57,10 +61,10 @@ export default {
       axios
         .get(`/listings/${this.$route.params.id}`)
         .then((response) => {
+          console.log(response.data);
           this.listing = response.data;
           this.images = response.data.images;
           this.user = response.data.user;
-          console.log(this.images);
         })
         .catch((error) => {
           console.log(error.response.status);
