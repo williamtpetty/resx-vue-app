@@ -47,15 +47,18 @@
       v-bind:key="listing.id"
     >
       <h2>{{ listing.title }}</h2>
-
-      <p>
+      <!-- v-if="`${listing.images.length}` == true" -->
+      <div>
         <router-link v-bind:to="`/listings/${listing.id}`"
-          ><img :src="`${listing.images[0].url}`" alt=""
-        /></router-link>
-      </p>
+          ><img :src="`${listing.images[0].url}`" alt="" />
+        </router-link>
+      </div>
 
       <p><strong>Address: </strong> {{ listing.address }}</p>
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
+      <!-- <router-link v-bind:to="`/users/${}`" tag="button"
+        >Host Profile</router-link
+      > -->
       <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
         >More Info</router-link
       >

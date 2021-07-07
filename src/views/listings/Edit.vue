@@ -81,7 +81,7 @@ export default {
       editListingParams: {},
       errors: [],
       images: [],
-      newImage: { url: "https://via.placeholder.com/300" },
+      newImage: {},
       listingId: "",
     };
   },
