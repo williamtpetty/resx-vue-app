@@ -12,7 +12,8 @@
       <router-link to="/listings">Listings</router-link>
       <span> | </span>
     </div>
-    <router-view />
+    <router-view :key="$route.fullPath" />
+    <!-- ^ this code in router-view rerenders the same path -->
   </div>
 </template>
 

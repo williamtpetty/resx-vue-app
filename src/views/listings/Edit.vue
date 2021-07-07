@@ -1,6 +1,6 @@
 <template>
   <div class="listings-new">
-    <form>
+    <form v-on:submit.prevent="editListing()">
       <h1>Edit Listing</h1>
 
       <ul>
@@ -61,9 +61,11 @@
       <button v-on:click="addImage(newImage)">Add Image</button>
       <div v-for="image in images" v-bind:key="image.id">
         <p>
+          {{ image.id }}
           <img :src="`${image.url}`" alt="" />
           <br />
           <button v-on:click="destroyImage(image)">Delete Image</button>
+          <!-- passing image object as parameter to function -->
         </p>
       </div>
     </div>
@@ -104,15 +106,23 @@ export default {
     },
 
     editListing: function () {
-      axios
-        .patch(`/listings/${this.$route.params.id}`, this.editListingParams)
-        .then((response) => {
-          console.log(response.data);
-          this.$router.push("/listings");
-        })
-        .catch((error) => {
-          this.errors = error.response.data.errors;
-        });
+      // if the listing doesn't have an image, stop this axios patch
+      // determines if images array has a length, if not, errors
+      if (this.images.length) {
+        axios
+          .patch(`/listings/${this.$route.params.id}`, this.editListingParams)
+          .then((response) => {
+            console.log(response.data);
+            this.$router.push("/listings");
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+          });
+      } else {
+        this.errors = [
+          "You must have at least one image to save this listing.",
+        ];
+      }
     },
 
     addImage: function (addOneImage) {
@@ -129,23 +139,26 @@ export default {
     },
 
     destroyImage: function (deleteThisImage) {
-      var imageIndex = this.images.indexOf(deleteThisImage);
-      console.log(imageIndex);
+      // parameter is image object
       console.log(deleteThisImage.id);
-      if (confirm("Are you sure you want to delete this image?"))
+      if (confirm("Are you sure you want to delete this image?")) {
         axios
-          .delete(`/images/${deleteThisImage.id}`)
+          .delete(`/images/${deleteThisImage.id}`) // should render the images id
           .then((response) => {
+            var imageIndex = this.images.indexOf(deleteThisImage);
+            //assigns image index to var
             this.images.splice(imageIndex, 1);
+            // splices image at index, removes 1 element from array
             console.log(response.data);
           })
           .catch((error) => {
             this.errors = error.response.data.errors;
           });
+      }
     },
 
     destroyListing: function () {
-      if (confirm("Are you sure you want to delete this listing?"))
+      if (confirm("Are you sure you want to delete this listing?")) {
         axios
           .delete(`/listings/${this.$route.params.id}`)
           .then((response) => {
@@ -155,6 +168,7 @@ export default {
           .catch((error) => {
             console.log(error.response);
           });
+      }
     },
   },
 };
