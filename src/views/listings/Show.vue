@@ -56,10 +56,6 @@
 </template>
 
 <style>
-img {
-  max-width: 350px;
-}
-
 #map {
   max-width: 500px;
   height: 500px;

@@ -66,11 +66,7 @@
   </div>
 </template>
 
-<style>
-img {
-  max-width: 200px;
-}
-</style>
+<style></style>
 
 <script>
 import axios from "axios";
