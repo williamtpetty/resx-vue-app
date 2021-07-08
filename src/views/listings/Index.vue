@@ -1,26 +1,12 @@
 <template>
   <div class="listings">
-    <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mx-auto">
-            <h1 class="text-white font-weight-light">
-              <span class="font-weight-bold">ResX</span> Listings
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Header -->
-    <h1>{{ message }}</h1>
-    <datalist>
+    <!-- <datalist>
       <option v-for="listing in listings" v-bind:key="listing.id">
         {{ listing.address }}
       </option>
-    </datalist>
+    </datalist> -->
 
-    <div>
+    <!-- <div>
       <label>Search by Keyword: </label>
       <br />
       <input
@@ -60,7 +46,6 @@
       v-bind:key="listing.id"
     >
       <h2>{{ listing.title }}</h2>
-      <!-- v-if="`${listing.images.length}` == true" -->
       <div>
         <router-link v-bind:to="`/listings/${listing.id}`"
           ><img :src="`${listing.images[0].url}`" alt="" />
@@ -69,17 +54,82 @@
 
       <p><strong>Address: </strong> {{ listing.address }}</p>
       <p><strong>Availability: </strong>{{ listing.availability }}</p>
-      <!-- <router-link v-bind:to="`/users/${}`" tag="button"
-        >Host Profile</router-link
-      > -->
+      <router-link v-bind:to="`/users/${current}`" tag="button"
+        >Host Profile this shit right here dont work</router-link
+      >
       <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
         >More Info</router-link
       >
+    </div> -->
+
+    <!-- Begin Header -->
+    <div class="py-5 bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <h1 class="text-white font-weight-light">
+              <span class="font-weight-bold">ResX</span> Listings Index
+            </h1>
+          </div>
+        </div>
+      </div>
     </div>
+    <!-- End Header -->
+
+    <!-- Begin Cards -->
+
+    <div class="py-5 bg-light">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12 col-md-12">
+            <div class="row">
+              <div
+                class="col-lg-4 col-md-4"
+                v-for="listing in listings"
+                v-bind:key="listing.id"
+              >
+                <div
+                  style="height: 525px"
+                  class="box shadow-sm rounded bg-white mb-3 blog-card border-0"
+                >
+                  <router-link v-bind:to="`/listings/${listing.id}`"
+                    ><img
+                      class="card-img-top"
+                      :src="`${listing.images[0].url}`"
+                      alt="Card image cap"
+                    />
+                  </router-link>
+                  <div class="card-body mb-auto">
+                    <span class="badge badge-success"></span>
+                    <h6 class="text-dark">{{ listing.title }}</h6>
+                    <p class="mb-auto">
+                      {{ listing.description | truncate(100) }}
+                    </p>
+                  </div>
+                  <div class="card-footer border-0 position-sticky">
+                    <p class="mb-0">
+                      <img
+                        class="rounded-circle"
+                        :src="`${listing.user.image_url}`"
+                        alt="Card image cap"
+                      />
+                      <strong
+                        >{{ listing.user.first_name }}
+                        {{ listing.user.last_name }}</strong
+                      >
+                      {{ listing.created_at }}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Cards -->
   </div>
 </template>
-
-<style></style>
 
 <script>
 import axios from "axios";

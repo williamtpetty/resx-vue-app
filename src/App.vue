@@ -20,7 +20,7 @@
         <a class="navbar-brand mr-2" href="index.html"
           ><img src="/img/logo.svg" alt="" />
         </a>
-        <!-- CHANGE THIS UGLY ASS CROWN -->
+        <!-- CHANGE THAT UGLY ASS CROWN -->
 
         <ul class="navbar-nav ml-auto d-flex align-items-center">
           <!-- BEGIN DELETE LINE 22 -->
@@ -85,8 +85,9 @@
               <!-- Counter - Alerts -->
               <span class="badge badge-danger badge-counter">1</span>
             </a>
-            <!-- Dropdown - Alerts -->
-            <!-- <div
+          </li>
+          <!-- Dropdown - Alerts ****** NEED TO ALL BE MOVED INSIDE ^ </li> TAG IF USED -->
+          <!-- <div
               class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm"
             >
               <h6 class="dropdown-header">Message Center</h6>
@@ -161,8 +162,7 @@
                 >Read More Messages</a
               >
             </div> -->
-            <!-- Dropdown end -->
-          </li>
+          <!-- Dropdown end -->
           <!-- 'Messages' icon end -->
 
           <!-- Basic navigation start -->

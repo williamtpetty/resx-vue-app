@@ -1,0 +1,166 @@
+
+<datalist>
+  <option v-for="listing in listings" v-bind:key="listing.id">
+    {{ listing.address }}
+  </option>
+</datalist>
+
+<!-- sorting -->
+<div>
+  <label>Search by Keyword: </label>
+  <br />
+  <input
+    type="text"
+    v-model="searchTerm"
+    list="address"
+    placeholder="Keyword"
+  />
+</div>
+<br />
+
+<button v-on:click="sortByAttribute('title')">
+  Sort by Title
+  <span v-if="this.sortAttribute == 'title' && this.sortDirection == -1"
+    >v</span
+  >
+  <span v-if="this.sortAttribute == 'title' && this.sortDirection == 1"
+    >^</span
+  >
+</button>
+<button v-on:click="sortByAttribute('created_at')">
+  Sort by Age
+  <span
+    v-if="this.sortAttribute == 'created_at' && this.sortDirection == -1"
+    >v</span
+  >
+  <span v-if="this.sortAttribute == 'created_at' && this.sortDirection == 1"
+    >^</span
+  >
+</button>
+<!-- sorting -->
+<div
+  v-for="listing in filterBy(
+    orderBy(listings, sortAttribute, sortDirection),
+    searchTerm
+  )"
+  v-bind:key="listing.id"
+>
+  <h2>{{ listing.title }}</h2>
+  <!-- v-if="`${listing.images.length}` == true" -->
+  <div>
+    <router-link v-bind:to="`/listings/${listing.id}`"
+      ><img :src="`${listing.images[0].url}`" alt="" />
+    </router-link>
+  </div>
+
+  <p><strong>Address: </strong> {{ listing.address }}</p>
+  <p><strong>Availability: </strong>{{ listing.availability }}</p>
+  <!-- <router-link v-bind:to="`/users/${}`" tag="button"
+    >Host Profile</router-link
+  > -->
+  <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
+    >More Info</router-link
+  >
+</div>
+</div>
+
+
+<!-- Begin Cards for Index.vue -->
+<div class="py-5">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12">
+        <div class="row">
+          <div class="col-lg-4 col-md-4">
+            <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0">
+              <a href="#"
+                ><img
+                  class="card-img-top"
+                  src="img/blog/1.png"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <span class="badge badge-success">House/Villa</span>
+                  <h6 class="text-dark">Possimus aut mollitia eum ipsum</h6>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Possimus aut mollitia eum ipsum fugiat odio officiis odit.
+                  </p>
+                </div>
+                <div class="card-footer border-0">
+                  <p class="mb-0">
+                    <img
+                      class="rounded-circle"
+                      src="img/user/3.jpg"
+                      alt="Card image cap"
+                    />
+                    <strong>Rahul Yadav</strong> On October 03, 2020
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0">
+              <a href="#"
+                ><img
+                  class="card-img-top"
+                  src="img/blog/1.png"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <span class="badge badge-success">House/Villa</span>
+                  <h6 class="text-dark">Possimus aut mollitia eum ipsum</h6>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Possimus aut mollitia eum ipsum fugiat odio officiis odit.
+                  </p>
+                </div>
+                <div class="card-footer border-0">
+                  <p class="mb-0">
+                    <img
+                      class="rounded-circle"
+                      src="img/user/3.jpg"
+                      alt="Card image cap"
+                    />
+                    <strong>Rahul Yadav</strong> On October 03, 2020
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-4">
+            <div class="box shadow-sm rounded bg-white mb-3 blog-card border-0">
+              <a href="#"
+                ><img
+                  class="card-img-top"
+                  src="img/blog/1.png"
+                  alt="Card image cap"
+                />
+                <div class="card-body">
+                  <span class="badge badge-success">House/Villa</span>
+                  <h6 class="text-dark">Possimus aut mollitia eum ipsum</h6>
+                  <p class="mb-0">
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Possimus aut mollitia eum ipsum fugiat odio officiis odit.
+                  </p>
+                </div>
+                <div class="card-footer border-0">
+                  <p class="mb-0">
+                    <img
+                      class="rounded-circle"
+                      src="img/user/3.jpg"
+                      alt="Card image cap"
+                    />
+                    <strong>Rahul Yadav</strong> On October 03, 2020
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- End Cards -->
+</div>
