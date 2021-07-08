@@ -1,6 +1,19 @@
 <template>
   <div class="users-show">
-    <h1>{{ message }}</h1>
+    <!-- Begin Header -->
+    <div class="py-5 bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <h1 class="text-white font-weight-light">
+              <span class="font-weight-bold">ResX</span> Your Profile
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
+
     <div>
       <img :src="`${user.image_url}`" alt="" />
       <h2>{{ user.first_name }} {{ user.last_name }}</h2>

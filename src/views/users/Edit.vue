@@ -1,8 +1,19 @@
 <template>
   <div class="users-edit">
+    <!-- Begin Header -->
+    <div class="py-5 bg-primary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <h1 class="text-white font-weight-light">
+              <span class="font-weight-bold">ResX</span> Edit Your Info
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
     <form v-on:submit.prevent="editUser()">
-      <h1>User Edit</h1>
-
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}

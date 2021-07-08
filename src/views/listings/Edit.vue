@@ -1,8 +1,19 @@
 <template>
   <div class="listings-new">
+    <!-- Begin Header -->
+    <div class="py-5 bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <h1 class="text-white font-weight-light">
+              <span class="font-weight-bold">ResX</span> Edit Listing
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
     <form v-on:submit.prevent="editListing()">
-      <h1>Edit Listing</h1>
-
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
           {{ error }}
