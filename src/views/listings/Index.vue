@@ -76,6 +76,15 @@
     </div>
     <!-- End Header -->
 
+    <div class="bg-light d-flex justify-content-center pt-3">
+      <h5 class="my-auto mr-2">Search for listing:</h5>
+      <input
+        type="text"
+        v-model="searchTerm"
+        list="address"
+        placeholder="Keyword"
+      />
+    </div>
     <!-- Begin Cards -->
 
     <div class="py-5 bg-light">
@@ -84,13 +93,21 @@
           <div class="col-lg-12 col-md-12">
             <div class="row">
               <div
-                class="col-lg-4 col-md-4"
-                v-for="listing in listings"
+                class="col-lg-4 col-md-4 pb-4"
+                v-for="listing in filterBy(listings, searchTerm)"
                 v-bind:key="listing.id"
               >
                 <div
-                  style="height: 525px"
-                  class="box shadow-sm rounded bg-white mb-3 blog-card border-0"
+                  class="
+                    box
+                    shadow-sm
+                    rounded
+                    bg-white
+                    mb-3
+                    blog-card
+                    border-0
+                    h-100
+                  "
                 >
                   <router-link v-bind:to="`/listings/${listing.id}`"
                     ><img
@@ -99,14 +116,16 @@
                       alt="Card image cap"
                     />
                   </router-link>
-                  <div class="card-body mb-auto">
+                  <div class="card-body">
                     <span class="badge badge-success"></span>
                     <h6 class="text-dark">{{ listing.title }}</h6>
-                    <p class="mb-auto">
+                    <p class="mb-0">
                       {{ listing.description | truncate(100) }}
                     </p>
+
+                    <p class="pt-4">{{ listing.address }}</p>
                   </div>
-                  <div class="card-footer border-0 position-sticky">
+                  <div class="card-footer mt-auto border-0">
                     <p class="mb-0">
                       <img
                         class="rounded-circle"
@@ -117,7 +136,7 @@
                         >{{ listing.user.first_name }}
                         {{ listing.user.last_name }}</strong
                       >
-                      {{ listing.created_at }}
+                      On October 03, 2020
                     </p>
                   </div>
                 </div>
