@@ -66,8 +66,9 @@
     <div class="py-4">
       <div class="container">
         <div class="row">
-          <!-- Main Content -->
+          <!-- Begin Left Hand column -->
           <aside class="col col-xl-3 order-xl-1 col-lg-12 order-lg-1 col-12">
+            <!-- Begin Basic Info card w/ picture -->
             <div
               class="
                 box
@@ -89,16 +90,40 @@
                 <h5 class="font-weight-bold text-dark mb-1 mt-4">
                   {{ user.first_name }} {{ user.last_name }}
                 </h5>
+                <router-link
+                  v-if="`${user.id}` === `${currentUserId}`"
+                  :to="`/users/${user.id}/edit`"
+                  class="btn btn-outline-primary pl-4 pr-4 mb-1"
+                  >Edit Your Info</router-link
+                ><router-link
+                  v-if="
+                    `${user.host}` === 'true' &&
+                    `${user.id}` === `${currentUserId}`
+                  "
+                  class="btn btn-outline-primary pl-4 pr-4"
+                  to="/listings/new"
+                  >New Listing</router-link
+                >
               </div>
-
-              <div class="row pt-1 border-right d-flex justify-content-center">
-                <h6 class="font-weight-bold text-dark">
-                  {{ listings.length }}
-                </h6>
+              <!-- if/else  -->
+              <div v-if="`${user.host}` === 'true'" class="d-flex">
+                <div class="col-6 border-right p-3">
+                  <h6 class="font-weight-bold text-dark mb-1">Host</h6>
+                  <p class="mb-0 text-black-50 small">Confirmed</p>
+                </div>
+                <div class="col-6 p-3">
+                  <h6 class="font-weight-bold text-dark mb-1">
+                    {{ listings.length }}
+                  </h6>
+                  <p class="mb-0 text-black-50 small">Listings</p>
+                </div>
               </div>
-              <div>
-                <p class="mb-0 text-black-50 small">Listings</p>
+              <div v-else>
+                <div class="row border-right p-3 d-flex justify-content-center">
+                  <p class="mb-0 text-black-50 small">User is not a host</p>
+                </div>
               </div>
+              <!-- if/else -->
               <div class="overflow-hidden border-top">
                 <a
                   class="font-weight-bold p-3 d-block"
@@ -108,9 +133,12 @@
                 </a>
               </div>
             </div>
+            <!-- End basic info card w/ picture -->
+
+            <!-- Begin More Info Card -->
             <div class="box shadow-sm border rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
-                <h6 class="m-0">Skills & Endorsements</h6>
+                <h6 class="m-0">More Info</h6>
               </div>
               <div class="box-body">
                 <div
@@ -124,20 +152,22 @@
                   "
                 >
                   <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/l4.png" alt="" />
+                    <img
+                      class="rounded-circle"
+                      src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR1zkljrZpwGv9Z5dpl-uO4jzYUlhPkPHQayA&usqp=CAU"
+                      alt=""
+                    />
                   </div>
                   <div class="font-weight-bold">
-                    <div class="text-truncate">
-                      Character Concept
-                      <span class="badge badge-dark ml-1">1</span>
-                    </div>
+                    <div class="text-truncate">Location</div>
                     <div class="small text-muted">
-                      <span class="text-primary">You and 1 connection</span>
-                      have given endorsements for this skill
+                      {{ user.city }}, {{ user.state }}
                     </div>
                   </div>
                 </div>
-                <div
+
+                <!-- Extra Slots for Info -->
+                <!-- <div
                   class="
                     d-flex
                     align-items-center
@@ -160,8 +190,8 @@
                       endorsement for this skill
                     </div>
                   </div>
-                </div>
-                <div
+                </div> -->
+                <!-- <div
                   class="
                     d-flex
                     align-items-center
@@ -183,37 +213,70 @@
                       endorsement for this skill
                     </div>
                   </div>
+                </div> -->
+                <!-- End extra Info slots -->
+              </div>
+            </div>
+            <!-- End more info card -->
+            <!-- Begin Friends/Followers card -->
+            <div class="box shadow-sm border rounded bg-white mb-3">
+              <div class="box-title border-bottom p-3">
+                <h6 class="m-0">Eventually Friends/Followers Card</h6>
+              </div>
+              <div class="box-body p-3">
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    osahan-post-header
+                    mb-3
+                    people-list
+                  "
+                >
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="/img/p4.png" alt="" />
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold mr-2">
+                    <div class="text-truncate">Sophia Lee</div>
+                    <div class="small text-gray-500">@Harvard</div>
+                  </div>
+                  <span class="ml-auto"
+                    ><button type="button" class="btn btn-light btn-sm">
+                      Connent
+                    </button>
+                  </span>
+                </div>
+                <div
+                  class="
+                    d-flex
+                    align-items-center
+                    osahan-post-header
+                    mb-3
+                    people-list
+                  "
+                >
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="/img/p9.png" alt="" />
+                    <div class="status-indicator bg-success"></div>
+                  </div>
+                  <div class="font-weight-bold mr-2">
+                    <div class="text-truncate">John Doe</div>
+                    <div class="small text-gray-500">Traveler</div>
+                  </div>
+                  <span class="ml-auto"
+                    ><button type="button" class="btn btn-light btn-sm">
+                      Connent
+                    </button>
+                  </span>
                 </div>
               </div>
             </div>
-            <div
-              class="
-                box
-                shadow-sm
-                mb-3
-                rounded
-                bg-white
-                ads-box
-                text-center
-                overflow-hidden
-              "
-            >
-              <img
-                src="img/job1.png"
-                class="img-fluid"
-                alt="Responsive image"
-              />
-              <div class="p-3 border-bottom">
-                <h6 class="font-weight-bold text-dark">Osahan Solutions</h6>
-                <p class="mb-0 text-muted">Looking for talent?</p>
-              </div>
-              <div class="p-3">
-                <button type="button" class="btn btn-outline-primary pl-4 pr-4">
-                  POST A JOB
-                </button>
-              </div>
-            </div>
+            <!-- End friends/followers card -->
           </aside>
+          <!-- End Left hand Column -->
+
+          <!-- Begin center column -->
           <main
             class="
               col col-xl-6
@@ -223,61 +286,57 @@
               col-md-12 col-sm-12 col-12
             "
           >
+            <!-- Begin About me -->
             <div class="box shadow-sm border rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
-                <h6 class="m-0">About You</h6>
+                <h6 class="m-0">About Me</h6>
               </div>
               <div class="box-body p-3">
                 <p>
-                  It is a long established fact that a reader will be distracted
-                  by the readable content of a page when looking at its layout.
-                  The point of using Lorem Ipsum is that it has a more-or-less
-                  normal distribution of letters, as opposed to using 'Content
-                  here, content here', making it look like readable English.
-                  Many desktop publishing packages and web page editors now use
-                  Lorem Ipsum as their default model text, and a search for
-                  'lorem ipsum' will uncover many web sites still in their
-                  infancy. Various versions have evolved over the years,
-                  sometimes by accident, sometimes on purpose (injected humour
-                  and the like).
-                </p>
-                <p class="mb-0">
-                  Find the most qualified people in the most unexpected places.
-                  Information for applicants to consider when applying for local
-                  positions. The largest community on the web to find and list
-                  jobs that aren't restricted by commutes or a specific
-                  location.
+                  {{ user.about_me }}
                 </p>
               </div>
             </div>
-            <div class="box shadow-sm border rounded bg-white mb-3">
+            <!-- End About me -->
+
+            <!-- Begin Listings -->
+            <div
+              v-if="`${user.host}` === 'true'"
+              class="box shadow-sm border rounded bg-white mb-3"
+            >
               <div class="box-title border-bottom p-3">
-                <h6 class="m-0">Experience</h6>
+                <h6 class="m-0">Listings</h6>
               </div>
-              <div class="box-body p-3 border-bottom">
+              <!-- listing -->
+              <div
+                class="box-body p-3 border-bottom"
+                v-for="listing in listings"
+                v-bind:key="listing.id"
+              >
                 <div class="d-flex align-items-top job-item-header pb-2">
                   <div class="mr-2">
-                    <h6 class="font-weight-bold text-dark mb-0">
-                      Web designer
-                    </h6>
-                    <div class="text-truncate text-primary">Spotify Inc.</div>
+                    <router-link v-bind:to="`/listings/${listing.id}`"
+                      ><h6 class="font-weight-bold text-dark mb-0">
+                        {{ listing.title }}
+                      </h6></router-link
+                    >
+
                     <div class="small text-gray-500">
-                      Oct 2020 - Present (4 year 7 month)
+                      {{ listing.availability }}
                     </div>
                   </div>
                   <img
                     class="img-fluid ml-auto mb-auto"
-                    src="img/l3.png"
+                    :src="`${listing.images[0].url}`"
                     alt=""
                   />
                 </div>
                 <p class="mb-0">
-                  Find the most qualified people in the most unexpected places.
-                  Information for applicants to consider when applying for local
-                  positions.
+                  {{ listing.description | truncate(200) }}
                 </p>
               </div>
-              <div class="box-body p-3 border-bottom">
+
+              <!-- <div class="box-body p-3 border-bottom">
                 <div class="d-flex align-items-top job-item-header pb-2">
                   <div class="mr-2">
                     <h6 class="font-weight-bold text-dark mb-0">
@@ -322,185 +381,15 @@
                   The largest community on the web to find and list jobs that
                   aren't restricted by commutes or a specific location.
                 </p>
-              </div>
+              </div> -->
             </div>
-            <div class="box shadow-sm border rounded bg-white mb-3">
-              <div class="box-title border-bottom p-3">
-                <h6 class="m-0">Education</h6>
-              </div>
-              <div class="box-body p-3 border-bottom">
-                <div class="d-flex align-items-top job-item-header pb-2">
-                  <div class="mr-2">
-                    <h6 class="font-weight-bold text-dark mb-0">
-                      Stanford University
-                    </h6>
-                    <div class="text-truncate text-primary">
-                      Master’s programmes
-                    </div>
-                    <div class="small text-gray-500">
-                      Oct 2020 - Present (4 year 7 month)
-                    </div>
-                  </div>
-                  <img
-                    class="img-fluid ml-auto mb-auto"
-                    src="img/e1.png"
-                    alt=""
-                  />
-                </div>
-                <p class="mb-0">
-                  Find the most qualified people in the most unexpected places.
-                  Information for applicants to consider when applying for local
-                  positions.
-                </p>
-              </div>
-              <div class="box-body p-3">
-                <div class="d-flex align-items-top job-item-header pb-2">
-                  <div class="mr-2">
-                    <h6 class="font-weight-bold text-dark mb-0">
-                      Harvard University
-                    </h6>
-                    <div class="text-truncate text-primary">
-                      Maths and science education
-                    </div>
-                    <div class="small text-gray-500">
-                      Oct 2020 - Present (4 year 7 month)
-                    </div>
-                  </div>
-                  <img
-                    class="img-fluid ml-auto mb-auto"
-                    src="img/e2.png"
-                    alt=""
-                  />
-                </div>
-                <p class="mb-0">
-                  Wualified people in the most unexpected places. Information
-                  for applicants to consider when applying for local positions.
-                </p>
-              </div>
-            </div>
+            <!-- End Listings -->
           </main>
+          <!-- End Center Column -->
+
+          <!-- Begin Right column -->
           <aside class="col col-xl-3 order-xl-3 col-lg-12 order-lg-3 col-12">
-            <div class="box shadow-sm border rounded bg-white mb-3">
-              <div class="box-title border-bottom p-3">
-                <h6 class="m-0">Who viewed your profile</h6>
-              </div>
-              <div class="box-body p-3">
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    osahan-post-header
-                    mb-3
-                    people-list
-                  "
-                >
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/p4.png" alt="" />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold mr-2">
-                    <div class="text-truncate">Sophia Lee</div>
-                    <div class="small text-gray-500">@Harvard</div>
-                  </div>
-                  <span class="ml-auto"
-                    ><button type="button" class="btn btn-light btn-sm">
-                      Connent
-                    </button>
-                  </span>
-                </div>
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    osahan-post-header
-                    mb-3
-                    people-list
-                  "
-                >
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/p9.png" alt="" />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold mr-2">
-                    <div class="text-truncate">John Doe</div>
-                    <div class="small text-gray-500">Traveler</div>
-                  </div>
-                  <span class="ml-auto"
-                    ><button type="button" class="btn btn-light btn-sm">
-                      Connent
-                    </button>
-                  </span>
-                </div>
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    osahan-post-header
-                    mb-3
-                    people-list
-                  "
-                >
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/p10.png" alt="" />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold mr-2">
-                    <div class="text-truncate">Julia Cox</div>
-                    <div class="small text-gray-500">Art Designer</div>
-                  </div>
-                  <span class="ml-auto"
-                    ><button type="button" class="btn btn-light btn-sm">
-                      Connent
-                    </button>
-                  </span>
-                </div>
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    osahan-post-header
-                    mb-3
-                    people-list
-                  "
-                >
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/p11.png" alt="" />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold mr-2">
-                    <div class="text-truncate">Robert Cook</div>
-                    <div class="small text-gray-500">@Photography</div>
-                  </div>
-                  <span class="ml-auto"
-                    ><button type="button" class="btn btn-light btn-sm">
-                      Connent
-                    </button>
-                  </span>
-                </div>
-                <div
-                  class="
-                    d-flex
-                    align-items-center
-                    osahan-post-header
-                    people-list
-                  "
-                >
-                  <div class="dropdown-list-image mr-3">
-                    <img class="rounded-circle" src="img/p12.png" alt="" />
-                    <div class="status-indicator bg-success"></div>
-                  </div>
-                  <div class="font-weight-bold mr-2">
-                    <div class="text-truncate">Richard Bell</div>
-                    <div class="small text-gray-500">@Envato</div>
-                  </div>
-                  <span class="ml-auto"
-                    ><button type="button" class="btn btn-light btn-sm">
-                      Connent
-                    </button>
-                  </span>
-                </div>
-              </div>
-            </div>
+            <!-- Begin Links Card -->
             <div
               class="
                 box
@@ -514,20 +403,21 @@
               "
             >
               <img
-                src="img/ads1.png"
+                src="https://images.unsplash.com/photo-1541560052-3744e48ab80b?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxjb2xsZWN0aW9uLXRodW1ibmFpbHx8NDM3MTA5NXx8ZW58MHx8fHw%3D&dpr=1&auto=format&fit=crop&w=291.2&q=60"
                 class="img-fluid"
                 alt="Responsive image"
               />
               <div class="p-3 border-bottom">
-                <h6 class="font-weight-bold text-gold">Olink Premium</h6>
-                <p class="mb-0 text-muted">Grow &amp; nurture your network</p>
+                <h6 class="font-weight-bold text-gold">Links</h6>
               </div>
-              <div class="p-3">
-                <button type="button" class="btn btn-outline-gold pl-4 pr-4">
-                  ACTIVATE
-                </button>
+              <div class="p-3" v-for="url in urls" v-bind:key="url.id">
+                <a class="text-truncate" :href="`${url.personal_url}`">{{
+                  url.personal_url | truncate(25)
+                }}</a>
               </div>
             </div>
+            <!-- End links card -->
+
             <a href="job-profile.html">
               <div class="shadow-sm border rounded bg-white job-item mb-3">
                 <div class="d-flex align-items-center p-3 job-item-header">
@@ -540,7 +430,7 @@
                       <i class="feather-map-pin"></i> India, Punjab
                     </div>
                   </div>
-                  <img class="img-fluid ml-auto" src="img/l3.png" alt="" />
+                  <img class="img-fluid ml-auto" src="/img/l3.png" alt="" />
                 </div>
                 <div
                   class="
@@ -557,7 +447,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p9.png"
+                      src="/img/p9.png"
                       alt=""
                       data-original-title="Sophia Lee"
                     />
@@ -566,7 +456,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p10.png"
+                      src="/img/p10.png"
                       alt=""
                       data-original-title="John Doe"
                     />
@@ -575,7 +465,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p11.png"
+                      src="/img/p11.png"
                       alt=""
                       data-original-title="Julia Cox"
                     />
@@ -584,7 +474,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p10.png"
+                      src="/img/p10.png"
                       alt=""
                       data-original-title="John Doe"
                     />
@@ -593,7 +483,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p11.png"
+                      src="/img/p11.png"
                       alt=""
                       data-original-title="Julia Cox"
                     />
@@ -602,7 +492,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p12.png"
+                      src="/img/p12.png"
                       alt=""
                       data-original-title="Robert Cook"
                     />
@@ -630,7 +520,7 @@
                       <i class="feather-map-pin"></i> London, UK
                     </div>
                   </div>
-                  <img class="img-fluid ml-auto" src="img/l4.png" alt="" />
+                  <img class="img-fluid ml-auto" src="/img/l4.png" alt="" />
                 </div>
                 <div
                   class="
@@ -647,7 +537,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p13.png"
+                      src="/img/p13.png"
                       alt=""
                       data-original-title="Sophia Lee"
                     />
@@ -656,7 +546,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p1.png"
+                      src="/img/p1.png"
                       alt=""
                       data-original-title="John Doe"
                     />
@@ -665,7 +555,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p2.png"
+                      src="/img/p2.png"
                       alt=""
                       data-original-title="Julia Cox"
                     />
@@ -674,7 +564,7 @@
                       data-toggle="tooltip"
                       data-placement="top"
                       title=""
-                      src="img/p3.png"
+                      src="/img/p3.png"
                       alt=""
                       data-original-title="Robert Cook"
                     />
@@ -707,6 +597,7 @@ export default {
       message: "User Show Page",
       user: {},
       listings: [],
+      urls: [],
       toggle: false,
       currentUserId: localStorage.getItem("user_id"),
     };
@@ -721,7 +612,8 @@ export default {
       axios.get(`/users/${this.$route.params.id}`).then((response) => {
         this.user = response.data;
         this.listings = response.data.listings;
-        console.log(this.user);
+        this.urls = response.data.personal_urls;
+        console.log(response.data.personal_urls);
       });
     },
   },

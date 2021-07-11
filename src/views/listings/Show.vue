@@ -212,23 +212,16 @@
             >
               <div class="card-body">
                 <h5 class="card-title mb-4">Email the Host</h5>
-                <form name="sentMessage">
+                <form
+                  action="https://formspree.io/f/xpzkjzkg"
+                  method="POST"
+                  name="sentMessage"
+                >
                   <div class="control-group form-group">
                     <div class="controls">
-                      <label
-                        >First Name <span class="text-danger">*</span></label
-                      >
+                      <label>Name <span class="text-danger">*</span></label>
                       <input
-                        v-model="this.user.first_name"
-                        type="text"
-                        class="form-control"
-                        required=""
-                      />
-                      <label
-                        >Last Name <span class="text-danger">*</span></label
-                      >
-                      <input
-                        v-model="this.user.last_name"
+                        placeholder="Name"
                         type="text"
                         class="form-control"
                         required=""
@@ -240,7 +233,8 @@
                         >Your Email <span class="text-danger">*</span></label
                       >
                       <input
-                        v-model="this.user.email"
+                        name="_replyto"
+                        placeholder="Email"
                         type="email"
                         class="form-control"
                         required=""
@@ -250,19 +244,17 @@
 
                   <div class="control-group form-group">
                     <div class="controls">
-                      <label>Email <span class="text-danger">*</span></label>
+                      <label>Message <span class="text-danger">*</span></label>
                       <textarea
+                        placeholder="I am interested in your listing at this location"
+                        name="message"
                         rows="10"
                         cols="100"
                         class="form-control"
                       ></textarea>
                     </div>
                   </div>
-                  <button
-                    type="submit"
-                    class="btn btn-primary"
-                    :href="`mailto:${user.email}?subject=Interested in: ${listing.address}`"
-                  >
+                  <button type="submit" class="btn btn-primary">
                     Request Reservation!
                   </button>
                 </form>
