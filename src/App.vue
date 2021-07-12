@@ -17,13 +17,13 @@
     <nav class="navbar navbar-expand navbar-light bg-white osahan-nav-top p-0">
       <div class="container">
         <!-- THIS IS THAT UGLY ASS CROWN LEFT SIDE -->
-        <a class="navbar-brand mr-2" href="index.html"
+        <a class="navbar-brand mr-2" href="/"
           ><img src="/img/logo.svg" alt="" />
         </a>
         <!-- CHANGE THAT UGLY ASS CROWN -->
 
         <ul class="navbar-nav ml-auto d-flex align-items-center">
-          <!-- BEGIN DELETE LINE 22 -->
+          <!-- BEGIN DELETE LINE 26 -->
           <!-- Nav Item - Search Dropdown (Visible Only XS) -->
           <!-- <li class="nav-item dropdown no-arrow d-sm-none">
             <a
@@ -66,103 +66,19 @@
             </div>
           </li> -->
           <!-- End Nav Item -->
-          <!-- END DELETE LINE 22 -->
+          <!-- END DELETE LINE 26 -->
 
           <!-- 'Messages' icon start -->
           <li
             v-if="isLoggedIn()"
             class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown"
           >
-            <a
-              class="nav-link dropdown-toggle"
-              href="#"
-              role="button"
-              data-toggle="dropdown"
-              aria-haspopup="true"
-              aria-expanded="false"
-            >
-              <i class="feather-message-square"></i>
+            <router-link class="nav-link dropdown-toggle" to="/messages">
+              <i class="feather-message-square mr-2"></i>
+              Messages
               <!-- Counter - Alerts -->
-              <span class="badge badge-danger badge-counter">1</span>
-            </a>
+            </router-link>
           </li>
-          <!-- Dropdown - Alerts ****** NEED TO ALL BE MOVED INSIDE ^ </li> TAG IF USED -->
-          <!-- <div
-              class="dropdown-list dropdown-menu dropdown-menu-right shadow-sm"
-            >
-              <h6 class="dropdown-header">Message Center</h6>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="messages.html"
-              >
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="/img/p1.png" alt="" />
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div class="font-weight-bold overflow-hidden">
-                  <div class="text-truncate">
-                    Hi there! I am wondering if you can help me with a problem
-                    I've been having.
-                  </div>
-                  <div class="small text-gray-500">Emily Fowler · 58m</div>
-                </div>
-              </a>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="messages.html"
-              >
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/p2.png" alt="" />
-                  <div class="status-indicator"></div>
-                </div>
-                <div class="overflow-hidden">
-                  <div class="text-truncate">
-                    I have the photos that you ordered last month, how would you
-                    like them sent to you?
-                  </div>
-                  <div class="small text-gray-500">Jae Chun · 1d</div>
-                </div>
-              </a>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="messages.html"
-              >
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/p3.png" alt="" />
-                  <div class="status-indicator bg-warning"></div>
-                </div>
-                <div class="overflow-hidden">
-                  <div class="text-truncate">
-                    Last month's report looks great, I am very happy with the
-                    progress so far, keep up the good work!
-                  </div>
-                  <div class="small text-gray-500">Morgan Alvarez · 2d</div>
-                </div>
-              </a>
-              <a
-                class="dropdown-item d-flex align-items-center"
-                href="messages.html"
-              >
-                <div class="dropdown-list-image mr-3">
-                  <img class="rounded-circle" src="img/p4.png" alt="" />
-                  <div class="status-indicator bg-success"></div>
-                </div>
-                <div class="overflow-hidden">
-                  <div class="text-truncate">
-                    Am I a good boy? The reason I ask is because someone told me
-                    that people say this to all dogs, even if they aren't
-                    good...
-                  </div>
-                  <div class="small text-gray-500">Chicken the Dog · 2w</div>
-                </div>
-              </a>
-              <a
-                class="dropdown-item text-center small text-gray-500"
-                href="messages.html"
-                >Read More Messages</a
-              >
-            </div> -->
-          <!-- Dropdown end -->
           <!-- 'Messages' icon end -->
 
           <!-- Basic navigation start -->

@@ -613,7 +613,7 @@ export default {
         this.user = response.data;
         this.listings = response.data.listings;
         this.urls = response.data.personal_urls;
-        console.log(response.data.personal_urls);
+        console.log(response.data);
       });
     },
   },

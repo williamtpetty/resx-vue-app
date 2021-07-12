@@ -5,6 +5,7 @@ import Signup from "../views/Signup.vue";
 import Logout from "../views/Logout.vue";
 import UserShow from "../views/users/Show.vue";
 import UserEdit from "../views/users/Edit.vue";
+import MessagesIndex from "../views/users/MessagesIndex.vue";
 import Listings from "../views/listings/Index.vue";
 import ListingsNew from "../views/listings/New.vue";
 import ListingsShow from "../views/listings/Show.vue";
@@ -37,6 +38,11 @@ const routes = [
     path: "/users/:id",
     name: "users-show",
     component: UserShow,
+  },
+  {
+    path: "/messages",
+    name: "messages-index",
+    component: MessagesIndex,
   },
   {
     path: "/listings",
