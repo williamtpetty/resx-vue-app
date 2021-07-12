@@ -133,7 +133,7 @@
                 </div>
               </div>
               <div class="form-group">
-                <label class="mb-1">Image</label>
+                <label class="mb-1">Image URL (only)</label>
                 <div class="position-relative">
                   <input
                     type="text"
@@ -185,8 +185,46 @@
             <!-- End Submit Form -->
 
             <!-- Personal URLs -->
-            <div>THIS IS WHERE PERSONAL URLS HAVE TO GO</div>
+            <div class="form-group">
+              <div class="tab-content" id="myTabContent">
+                <div
+                  class="tab-pane fade show active"
+                  id="home"
+                  role="tabpanel"
+                  aria-labelledby="home-tab"
+                >
+                  <div class="p-3">
+                    <div class="form-group">
+                      <label class="mb-1">New Social Media Link</label>
+                      <div class="position-relative">
+                        <input
+                          type="text"
+                          v-model="newUrl"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <button
+                      class="btn btn-block btn-primary text-uppercase mb-3"
+                      v-on:click="addUrl(urlParameter)"
+                    >
+                      Add Your Link
+                    </button>
+                    <div class="row">
+                      <div
+                        class="col-md-4 mb-3"
+                        v-for="url in urls"
+                        v-bind:key="url.id"
+                      >
+                        <p>{{ url }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- End peronsal URLs -->
+
             <!-- Disclaimers -->
             <div class="form-group">
               <label class="mb-1"
@@ -212,7 +250,9 @@ export default {
     return {
       editUserParams: {},
       errors: [],
-      newUrl: {},
+      newUrl: "",
+      urls: [],
+      urlParameter: "",
     };
   },
 
@@ -223,9 +263,25 @@ export default {
   methods: {
     showUser: function () {
       axios.get(`/users/${this.$route.params.id}`).then((response) => {
-        console.log(response.data);
         this.editUserParams = response.data;
+        console.log(this.editUserParams);
       });
+    },
+
+    addUrl: function (pushUrlParameter) {
+      axios
+        .post(`/personal_urls`, {
+          user_id: this.editUserParams.id,
+          personal_url: this.newUrl,
+        })
+        .then((response) => {
+          this.urls.push(pushUrlParameter);
+          console.log(response.data);
+          this.newUrl = "";
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
     },
 
     editUser: function () {
