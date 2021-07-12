@@ -129,6 +129,13 @@
                     {{ user.first_name }}
                     {{ user.last_name }}</router-link
                   >
+                  <p>
+                    <router-link
+                      v-if="`${this.currentUserId}` == `${user.id}`"
+                      v-bind:to="`/listings/${listing.id}/edit`"
+                      >Edit Listing</router-link
+                    >
+                  </p>
                 </div>
               </div>
             </div>
@@ -246,7 +253,7 @@
                     <div class="controls">
                       <label>Message <span class="text-danger">*</span></label>
                       <textarea
-                        placeholder="I am interested in your listing at this location"
+                        :placeholder="`I am interested in your listing at ${listing.address}`"
                         name="message"
                         rows="10"
                         cols="100"
