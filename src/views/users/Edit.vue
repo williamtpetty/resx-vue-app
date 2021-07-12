@@ -235,6 +235,12 @@
             </div>
             <!-- End Disclaimers -->
           </div>
+          <button
+            class="btn btn-primary btn-block text-uppercase mb-3"
+            v-on:click="destroyUser()"
+          >
+            Delete User
+          </button>
         </div>
         <!-- </div> -->
       </div>
