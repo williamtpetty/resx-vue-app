@@ -1,5 +1,5 @@
 <template>
-  <div class="listings-new">
+  <div class="listings-edit">
     <!-- <form v-on:submit.prevent="editListing()">
       <ul>
         <li class="text-danger" v-for="error in errors" v-bind:key="error">
