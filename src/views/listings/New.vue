@@ -90,7 +90,7 @@
                 <div class="position-relative">
                   <input
                     type="text"
-                    v-model="editListingParams.title"
+                    v-model="newListingParams.title"
                     class="form-control"
                   />
                 </div>
@@ -99,7 +99,7 @@
                 <label class="mb-1">Address</label>
                 <div class="position-relative">
                   <input
-                    v-model="editListingParams.address"
+                    v-model="newListingParams.address"
                     class="form-control"
                   />
                 </div>
@@ -110,7 +110,7 @@
                   <textarea
                     rows="7"
                     cols="10"
-                    v-model="editListingParams.description"
+                    v-model="newListingParams.description"
                     class="form-control"
                   ></textarea>
                 </div>
@@ -120,7 +120,7 @@
                 <div class="position-relative">
                   <input
                     type="text"
-                    v-model="editListingParams.price"
+                    v-model="newListingParams.price"
                     class="form-control"
                   />
                 </div>
@@ -131,7 +131,7 @@
                   <textarea
                     rows="5"
                     cols="10"
-                    v-model="editListingParams.availability"
+                    v-model="newListingParams.availability"
                     class="form-control"
                   ></textarea>
                 </div>

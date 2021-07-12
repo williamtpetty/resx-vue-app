@@ -1,19 +1,6 @@
 <template>
   <div class="signup">
-    <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-12 mx-auto">
-            <h1 class="text-white font-weight-light">
-              <span class="font-weight-bold">ResX</span> Signup
-            </h1>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- End Header -->
-    <form v-on:submit.prevent="submit()">
+    <!-- <form v-on:submit.prevent="submit()">
       <h1>Signup</h1>
 
       <ul>
@@ -63,8 +50,122 @@
         />
       </div>
       <input type="submit" class="btn btn-primary" value="Submit" />
-    </form>
-    {{ this.newUserParams }}
+    </form> -->
+    <!-- Begin Header -->
+    <div class="py-5 bg-secondary">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12 mx-auto">
+            <h1 class="text-white font-weight-light">
+              <span class="font-weight-bold">ResX</span> Signup
+            </h1>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- End Header -->
+    <!-- Begin signup -->
+    <div class="bg-white">
+      <div class="container">
+        <div
+          class="row justify-content-center align-items-center d-flex vh-100"
+        >
+          <div class="col-md-4 mx-auto">
+            <div class="osahan-login py-4">
+              <div class="text-center mb-4">
+                <a href="index.html"><img src="img/logo.svg" alt="" /></a>
+                <h5 class="font-weight-bold mt-3">Join ResX</h5>
+                <p class="text-muted">Get Outside</p>
+              </div>
+              <form v-on:submit.prevent="submit()">
+                <div class="form-row">
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="mb-1">First Name</label>
+                      <div class="position-relative icon-form-control">
+                        <i class="feather-user position-absolute"></i>
+                        <input
+                          type="text"
+                          v-model="newUserParams.first_name"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col">
+                    <div class="form-group">
+                      <label class="mb-1">Last Name</label>
+                      <div class="position-relative icon-form-control">
+                        <i class="feather-user position-absolute"></i>
+                        <input
+                          type="text"
+                          v-model="newUserParams.last_name"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="mb-1">Email</label>
+                  <div class="position-relative icon-form-control">
+                    <i class="feather-at-sign position-absolute"></i>
+                    <input
+                      type="email"
+                      v-model="newUserParams.email"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="mb-1">Password (6 or more characters)</label>
+                  <div class="position-relative icon-form-control">
+                    <i class="feather-unlock position-absolute"></i>
+                    <input
+                      type="password"
+                      v-model="newUserParams.password"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="mb-1">Password Confirmation</label>
+                  <div class="position-relative icon-form-control">
+                    <i class="feather-unlock position-absolute"></i>
+                    <input
+                      type="password"
+                      v-model="newUserParams.password_confirmation"
+                      class="form-control"
+                    />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="mb-1"
+                    >You agree to the Olink <a href="#">User Agreement</a>,
+                    <a href="#">Privacy Policy</a>, and
+                    <a href="#">Cookie Policy</a>.</label
+                  >
+                </div>
+                <button
+                  class="btn btn-primary btn-block text-uppercase"
+                  type="submit"
+                >
+                  Sign Up
+                </button>
+
+                <div class="py-3 d-flex align-item-center">
+                  <span class="m-auto">
+                    Already on ResX?
+                    <a class="font-weight-bold" href="/">Sign in</a></span
+                  >
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- end signup -->
   </div>
 </template>
 

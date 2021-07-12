@@ -109,6 +109,7 @@
                     h-100
                   "
                 >
+                  <!-- listing images logic -->
                   <router-link v-bind:to="`/listings/${listing.id}`"
                     ><img
                       class="card-img-top"
@@ -116,6 +117,27 @@
                       alt="Card image cap"
                     />
                   </router-link>
+                  <!-- <div>
+                    <div v-if="`${listing.images.length}` == 1">
+                      <router-link v-bind:to="`/listings/${listing.id}`"
+                        ><img
+                          class="card-img-top"
+                          :src="`${listing.images[0].url}`"
+                          alt="Card image cap"
+                        />
+                      </router-link>
+                    </div>
+                    <div v-else>
+                      <router-link v-bind:to="`/listings/${listing.id}`"
+                        ><img
+                          class="card-img-top"
+                          src="https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg"
+                          alt="Card image cap"
+                        />
+                      </router-link>
+                    </div>
+                  </div> -->
+                  <!-- listing images -->
                   <div class="card-body">
                     <span class="badge badge-success"></span>
                     <h6 class="text-dark">{{ listing.title }}</h6>
@@ -174,8 +196,8 @@ export default {
   methods: {
     listingsIndex: function () {
       axios.get("/listings").then((response) => {
-        console.log(response.data);
         this.listings = response.data;
+        console.log(this.listings);
       });
     },
 
