@@ -1,0 +1,32 @@
+<ul>
+  <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
+</ul>
+<form v-on:submit.prevent="newMessage()">
+  <div class="form-group">
+    <label class="mb-1">New Message</label>
+    <div class="position-relative">
+      <textarea
+        rows="5"
+        cols="10"
+        v-model="newMessageBody"
+        class="form-control"
+      ></textarea>
+    </div>
+  </div>
+  <button class="btn btn-primary btn-block text-uppercase mb-3" type="submit">
+    Submit
+  </button>
+</form>
+<!-- Create message and errors end -->
+
+<!-- messages list -->
+<div v-for="message in conversation.messages" v-bind:key="message.id">
+  <div v-if="currentUserId == conversation.receiver_id" class="text-truncate">
+    {{ message.user.first_name }} {{ message.user.last_name }}
+  </div>
+  <div v-else class="text-truncate">
+    {{ message.user.first_name }} {{ message.user.last_name }}
+  </div>
+  {{ message.body }}
+</div>
+<!-- end messages list -->

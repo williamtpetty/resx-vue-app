@@ -73,7 +73,7 @@
             v-if="isLoggedIn()"
             class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown"
           >
-            <router-link class="nav-link dropdown-toggle" to="/messages">
+            <router-link class="nav-link dropdown-toggle" to="/">
               <i class="feather-message-square mr-2"></i>
               Messages
               <!-- Counter - Alerts -->

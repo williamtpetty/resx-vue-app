@@ -127,7 +127,7 @@
               <div class="overflow-hidden border-top">
                 <a
                   class="font-weight-bold p-3 d-block"
-                  :href="`mailto:${user.email}`"
+                  :href="`mailto:${user.email}?subject=Information Requested About Your Properties`"
                 >
                   Email {{ user.first_name }}
                 </a>
@@ -217,7 +217,46 @@
                 <!-- End extra Info slots -->
               </div>
             </div>
-            <!-- End more info card -->
+
+            <!-- Begin Conversations Card -->
+            <div
+              v-if="`${user.id}` === `${currentUserId}`"
+              class="box shadow-sm border rounded bg-white mb-3"
+            >
+              <div class="box-title border-bottom p-3">
+                <h6 class="m-0">Conversations</h6>
+              </div>
+              <div class="box-body">
+                <div
+                  v-for="conversation in conversations"
+                  v-bind:key="conversation.id"
+                  class="
+                    d-flex
+                    align-items-center
+                    osahan-post-header
+                    p-3
+                    border-bottom
+                    people-list
+                  "
+                >
+                  <div class="dropdown-list-image mr-3">
+                    <img class="rounded-circle" src="/img/p2.png" alt="" />
+                  </div>
+                  <router-link :to="`/conversations/${conversation.id}`">
+                    <div class="font-weight-bold">
+                      <div>
+                        {{ conversation.recent_user_name }}
+                      </div>
+                      <div class="small text-muted">
+                        {{ conversation.last_message.body | truncate(25) }}
+                      </div>
+                    </div>
+                  </router-link>
+                </div>
+              </div>
+            </div>
+            <!-- End Conversations card -->
+
             <!-- Begin Friends/Followers card -->
             <div class="box shadow-sm border rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
@@ -307,7 +346,7 @@
               <div class="box-title border-bottom p-3">
                 <h6 class="m-0">Listings</h6>
               </div>
-              <!-- listing -->
+              <!-- Begin listing loop -->
               <div
                 class="box-body p-3 border-bottom"
                 v-for="listing in listings"
@@ -335,6 +374,7 @@
                   {{ listing.description | truncate(200) }}
                 </p>
               </div>
+              <!-- End listing loop -->
 
               <!-- <div class="box-body p-3 border-bottom">
                 <div class="d-flex align-items-top job-item-header pb-2">
@@ -418,6 +458,7 @@
             </div>
             <!-- End links card -->
 
+            <!-- Begin Advertisements -->
             <a href="job-profile.html">
               <div class="shadow-sm border rounded bg-white job-item mb-3">
                 <div class="d-flex align-items-center p-3 job-item-header">
@@ -581,6 +622,7 @@
               </div>
             </a>
           </aside>
+          <!-- End Advertisements -->
         </div>
       </div>
     </div>
@@ -597,6 +639,7 @@ export default {
       message: "User Show Page",
       user: {},
       listings: [],
+      conversations: [],
       urls: [],
       toggle: false,
       currentUserId: localStorage.getItem("user_id"),
@@ -605,6 +648,18 @@ export default {
 
   created: function () {
     this.showUser();
+
+    // Grab conversations
+    axios
+      .get("/conversations")
+      .then((response) => {
+        console.log(response.data);
+        this.conversations = response.data;
+      })
+      .catch((error) => {
+        this.errors = error.response.data.errors;
+      });
+    // End grab conversations
   },
 
   methods: {
@@ -613,7 +668,7 @@ export default {
         this.user = response.data;
         this.listings = response.data.listings;
         this.urls = response.data.personal_urls;
-        console.log(response.data);
+        // console.log(response.data);
       });
     },
   },

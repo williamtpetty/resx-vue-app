@@ -5,7 +5,7 @@ import Signup from "../views/Signup.vue";
 import Logout from "../views/Logout.vue";
 import UserShow from "../views/users/Show.vue";
 import UserEdit from "../views/users/Edit.vue";
-import MessagesIndex from "../views/users/MessagesIndex.vue";
+import ConversationShow from "../views/users/ConversationShow.vue";
 import Listings from "../views/listings/Index.vue";
 import ListingsNew from "../views/listings/New.vue";
 import ListingsShow from "../views/listings/Show.vue";
@@ -40,9 +40,9 @@ const routes = [
     component: UserShow,
   },
   {
-    path: "/messages",
-    name: "messages-index",
-    component: MessagesIndex,
+    path: "/conversations/:id",
+    name: "conversation-show",
+    component: ConversationShow,
   },
   {
     path: "/listings",
