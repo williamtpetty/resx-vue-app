@@ -14,7 +14,7 @@
     </div>
     <!-- End Header -->
     <div class="py-4 bg-light bg-gradient vh-100">
-      <div class="d-flex justify-content-center container">
+      <div class="container">
         <div class="row">
           <!-- Main Content -->
           <main
@@ -114,7 +114,11 @@
                       </div>
                     </div>
                     <span class="ml-auto">
-                      <button class="dropdown-item" type="button">
+                      <button
+                        v-on:click="destroyConversation(conversation)"
+                        class="dropdown-item"
+                        type="button"
+                      >
                         <i class="feather-trash"></i> Delete
                       </button>
                     </span>
@@ -144,7 +148,7 @@
                       </div>
                       <div class="mr-1">
                         <div
-                          class="h6 mb-4"
+                          class="text-truncate"
                           v-if="currentUserId == conversation.receiver_id"
                         >
                           {{ message.user.first_name }}
@@ -273,6 +277,24 @@ export default {
           this.errors = error.response.data.errors;
           console.log(this.errors);
         });
+    },
+
+    destroyConversation: function (deleteThisConvo) {
+      console.log(deleteThisConvo.id);
+      if (confirm("Are you sure you want to delete this conversation?")) {
+        axios
+          .delete(`/conversations/${deleteThisConvo.id}`)
+          .then((response) => {
+            var conversationIndex = this.conversations.indexOf(deleteThisConvo);
+            this.conversations.splice(conversationIndex, 1);
+            console.log(response.data);
+            this.$router.push("/conversations");
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+            console.log(this.errors);
+          });
+      }
     },
   },
 };

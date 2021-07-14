@@ -14,7 +14,7 @@
     </div>
     <!-- End Header -->
     <div class="py-4 bg-light bg-gradient vh-100">
-      <div class="d-flex justify-content-center container">
+      <div class="container">
         <div class="row">
           <!-- Main Content -->
           <main
@@ -39,12 +39,12 @@
                         border-bottom
                       "
                     >
-                      <!-- <i class="feather-search position-absolute"></i>
+                      <i class="feather-search position-absolute"></i>
                       <input
                         placeholder="Search messages"
                         type="text"
                         class="form-control"
-                      /> -->
+                      />
                     </div>
                     <div class="osahan-chat-list">
                       <!-- Begin lefthand messages section -->
@@ -110,7 +110,7 @@
                           text-black-50
                         "
                       >
-                        Discuss your favorite spots
+                        Strike up a conversation on another user's profile
                       </div>
                     </div>
                     <span class="ml-auto">
@@ -181,12 +181,12 @@
                     <div class="p-3 d-flex align-items-center">
                       <div class="overflow-hidden"></div>
                       <span class="ml-auto">
-                        <button
+                        <!-- <button
                           type="submit"
                           class="btn btn-primary btn-sm rounded"
                         >
                           <i class="feather-send"></i> Send
-                        </button>
+                        </button> -->
                       </span>
                     </div>
                   </form>
