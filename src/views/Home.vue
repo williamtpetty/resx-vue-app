@@ -1,22 +1,7 @@
 <template>
   <div class="home">
-    <!-- <form v-on:submit.prevent="submit()">
-      <ul>
-        <li v-for="error in errors" v-bind:key="error">{{ error }}</li>
-      </ul>
-      <div>
-        <label>Email:</label>
-        <input type="email" v-model="email" />
-      </div>
-      <div>
-        <label>Password:</label>
-        <input type="password" v-model="password" />
-      </div>
-      <input type="submit" value="Login" />
-      <router-link to="/signup" tag="button">Signup</router-link>
-    </form> -->
     <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
+    <div class="py-5" style="background-color: #b0c4ed">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">
@@ -29,7 +14,7 @@
     </div>
     <!-- End Header -->
     <!-- begin login -->
-    <div class="bg-light">
+    <div class="bg-white bg-gradient vh-100">
       <div class="container">
         <div class="row justify-content-center align-items-center d-flex">
           <div class="col-md-4 mx-auto">

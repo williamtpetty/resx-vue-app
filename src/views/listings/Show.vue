@@ -1,38 +1,7 @@
 <template>
   <div class="listings-show">
-    <!-- 
-    <div>
-      <strong>Listing User:</strong>
-      <p>
-        <router-link v-bind:to="`/users/${user.id}`">
-          {{ user.first_name }}
-          {{ user.last_name }}</router-link
-        >
-      </p>
-      <a
-        :href="`mailto:${user.email}?subject=Interested in: ${listing.address}`"
-        >Email Host to Reserve Date!</a
-      >
-    </div>
-    <router-link
-      v-if="`${this.currentUserId}` == `${user.id}`"
-      v-bind:to="`/listings/${listing.id}/edit`"
-      tag="button"
-      >Edit Listing</router-link
-    > -->
-    <!-- <div>
-      <h2>{{ listing.title }}</h2>
-      <div v-for="image in images" v-bind:key="image.id">
-        <img :src="image.url" alt="" />
-      </div>
-      <p>{{ listing.description }}</p>
-      <p><strong>Address: </strong> {{ listing.address }}</p>
-      <p><strong>Availability: </strong>{{ listing.availability }}</p>
-      <p><strong>Price: </strong>{{ listing.price }}</p>
-    </div> -->
-
     <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
+    <div class="py-5" style="background-color: #b0c4ed">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">

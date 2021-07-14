@@ -1,18 +1,5 @@
 <template>
   <div id="app">
-    <!-- <div id="nav">
-      <router-link v-if="isLoggedIn()" :to="`/users/${getUserId()}`"
-        >Profile</router-link
-      >
-      <span v-if="isLoggedIn()"> | </span>
-      <router-link v-if="!isLoggedIn()" to="/">Login</router-link>
-      <span v-if="!isLoggedIn()"> | </span>
-      <router-link v-if="isLoggedIn()" to="/logout">Logout</router-link>
-      <span v-if="isLoggedIn()"> | </span>
-      <router-link to="/listings">Listings</router-link>
-      <span> | </span>
-    </div> -->
-
     <!-- Navigation -->
     <nav class="navbar navbar-expand navbar-light bg-white osahan-nav-top p-0">
       <div class="container">

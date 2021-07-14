@@ -1,7 +1,7 @@
 <template>
   <div class="conversation-show">
     <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
+    <div class="py-5" style="background-color: #b0c4ed">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">
@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- End Header -->
-    <div class="py-4 bg-light bg-gradient">
+    <div class="py-4 bg-light bg-gradient vh-100">
       <div class="d-flex justify-content-center container">
         <div class="row">
           <!-- Main Content -->

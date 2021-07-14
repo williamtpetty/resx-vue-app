@@ -50,7 +50,7 @@
       <input type="submit" class="btn btn-primary" value="Submit" />
     </form> -->
     <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
+    <div class="py-5" style="background-color: #b0c4ed">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">
@@ -64,7 +64,7 @@
     <!-- End Header -->
 
     <!-- Begin Form -->
-    <div class="bg-white">
+    <div class="bg-white vh-100">
       <div class="container">
         <!-- <div
           class="row justify-content-center align-items-center d-flex vh-100"

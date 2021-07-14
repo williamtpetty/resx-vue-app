@@ -1,7 +1,7 @@
 <template>
   <div class="users-edit">
     <!-- Begin Header -->
-    <div class="py-5 bg-secondary">
+    <div class="py-5" style="background-color: #b0c4ed">
       <div class="container">
         <div class="row">
           <div class="col-md-12 mx-auto">
