@@ -117,6 +117,8 @@
                       alt="Card image cap"
                     />
                   </router-link>
+
+                  <!-- figure the logic if time allows, if there is not an image added and they manually quit out make a placeholder -->
                   <!-- <div>
                     <div v-if="`${listing.images.length}` == 1">
                       <router-link v-bind:to="`/listings/${listing.id}`"
@@ -137,6 +139,8 @@
                       </router-link>
                     </div>
                   </div> -->
+                  <!-- figure the logic if time allows, if there is not an image added and they manually quit out make a placeholder -->
+
                   <!-- listing images -->
                   <div class="card-body">
                     <span class="badge badge-success"></span>
@@ -145,21 +149,24 @@
                       {{ listing.description | truncate(100) }}
                     </p>
 
-                    <p class="pt-4">{{ listing.address }}</p>
-                  </div>
-                  <div class="card-footer mt-auto border-0">
-                    <p class="mb-0">
-                      <img
-                        class="rounded-circle"
-                        :src="`${listing.user.image_url}`"
-                        alt="Card image cap"
-                      />
-                      <strong
-                        >{{ listing.user.first_name }}
-                        {{ listing.user.last_name }}</strong
-                      >
-                      On October 03, 2020
+                    <p v-if="isLoggedIn()" class="pt-4">
+                      {{ listing.address }}
                     </p>
+                  </div>
+                  <div v-if="isLoggedIn()" class="card-footer mt-auto border-0">
+                    <router-link v-bind:to="`/users/${listing.user.id}`">
+                      <p class="mb-0">
+                        <img
+                          class="rounded-circle"
+                          :src="`${listing.user.image_url}`"
+                          alt="Card image cap"
+                        />
+                        <strong
+                          >{{ listing.user.first_name }}
+                          {{ listing.user.last_name }}</strong
+                        >
+                      </p>
+                    </router-link>
                   </div>
                 </div>
               </div>
@@ -195,10 +202,16 @@ export default {
 
   methods: {
     listingsIndex: function () {
-      axios.get("/listings").then((response) => {
-        this.listings = response.data;
-        console.log(this.listings);
-      });
+      axios
+        .get("/listings")
+        .then((response) => {
+          this.listings = response.data;
+          console.log(this.listings);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          console.log(this.errors);
+        });
     },
 
     sortByAttribute: function (attribute) {
@@ -208,6 +221,10 @@ export default {
         this.sortAttribute = attribute;
         this.sortDirection = this.sortDirection * -1;
       }
+    },
+
+    isLoggedIn: function () {
+      return localStorage.getItem("jwt");
     },
   },
 };
