@@ -1,54 +1,5 @@
 <template>
   <div class="users-show">
-    <!-- <div>
-      <img :src="`${user.image_url}`" alt="" />
-      <h2>{{ user.first_name }} {{ user.last_name }}</h2>
-      <p>{{ user.about_me }}</p>
-      <a :href="`mailto:${user.email}`">Email this Host</a>
-      <p>{{ user.city }}, {{ user.state }}</p>
-
-      <router-link
-        v-if="`${user.id}` === `${currentUserId}`"
-        :to="`/users/${user.id}/edit`"
-        tag="button"
-        >Edit User Info</router-link
-      >
-
-      <br />
-      <router-link
-        v-if="`${user.host}` === 'true' && `${user.id}` === `${currentUserId}`"
-        to="/listings/new"
-        tag="button"
-        >New Listing</router-link
-      >
-      <br />
-
-      <div>
-        <button v-if="`${user.host}` === 'true'" v-on:click="toggle = !toggle">
-          Show All Listings Information
-        </button>
-        <div v-for="listing in listings" v-bind:key="listing.id">
-          <h3>{{ listing.title }}</h3>
-          <div v-show="toggle">
-            <p>{{ listing.address }}</p>
-            <p>{{ listing.availability }}</p>
-            <p>{{ listing.description }}</p>
-            <router-link v-bind:to="`/listings/${listing.id}`" tag="button"
-              >Full Listing</router-link
-            >
-            <br />
-            <div v-if="`${user.id}` === `${currentUserId}`">
-              <router-link
-                v-bind:to="`/listings/${listing.id}/edit`"
-                tag="button"
-                >Edit Listing</router-link
-              >
-            </div>
-          </div>
-        </div>
-      </div>
-    </div> -->
-
     <!-- Begin Header -->
     <!-- <div class="py-5 bg-secondary">
       <div class="container">
@@ -132,6 +83,17 @@
                   Email {{ user.first_name }}
                 </a>
               </div>
+
+              <!-- YOU'LL NEED THIS set to a button that initiates a new convo? findme -->
+              <!-- <div class="overflow-hidden border-top">
+                <button
+                  class="font-weight-bold p-3 d-block"
+                  v-on:click="createConversation()"
+                >
+                  Send {{ user.first_name }} a message
+                </button>
+              </div> -->
+              <!-- YOU'LL NEED THIS -->
             </div>
             <!-- End basic info card w/ picture -->
 
@@ -258,7 +220,7 @@
             <!-- End Conversations card -->
 
             <!-- Begin Friends/Followers card -->
-            <div class="box shadow-sm border rounded bg-white mb-3">
+            <!-- <div class="box shadow-sm border rounded bg-white mb-3">
               <div class="box-title border-bottom p-3">
                 <h6 class="m-0">Eventually Friends/Followers Card</h6>
               </div>
@@ -310,7 +272,7 @@
                   </span>
                 </div>
               </div>
-            </div>
+            </div> -->
             <!-- End friends/followers card -->
           </aside>
           <!-- End Left hand Column -->
@@ -375,55 +337,34 @@
                 </p>
               </div>
               <!-- End listing loop -->
-
-              <!-- <div class="box-body p-3 border-bottom">
-                <div class="d-flex align-items-top job-item-header pb-2">
-                  <div class="mr-2">
-                    <h6 class="font-weight-bold text-dark mb-0">
-                      Cloud Software Engineer
-                    </h6>
-                    <div class="text-truncate text-primary">Spotify Inc.</div>
-                    <div class="small text-gray-500">
-                      Oct 2020 - Present (4 year 7 month)
-                    </div>
-                  </div>
-                  <img
-                    class="img-fluid ml-auto mb-auto"
-                    src="img/l6.png"
-                    alt=""
-                  />
-                </div>
-                <p class="mb-0">
-                  Find the most qualified people in the most unexpected places.
-                  Information for..
-                </p>
-              </div>
-              <div class="box-body p-3">
-                <div class="d-flex align-items-top job-item-header pb-2">
-                  <div class="mr-2">
-                    <h6 class="font-weight-bold text-dark mb-0">
-                      UI/UX designer
-                    </h6>
-                    <div class="text-truncate text-primary">Behance</div>
-                    <div class="small text-gray-500">
-                      Oct 2020 - Present (4 year 7 month)
-                    </div>
-                  </div>
-                  <img
-                    class="img-fluid ml-auto mb-auto"
-                    src="img/l2.png"
-                    alt=""
-                  />
-                </div>
-                <p class="mb-0">
-                  Wualified people in the most unexpected places. Information
-                  for applicants to consider when applying for local positions.
-                  The largest community on the web to find and list jobs that
-                  aren't restricted by commutes or a specific location.
-                </p>
-              </div> -->
             </div>
             <!-- End Listings -->
+
+            <!-- Begin Send Message -->
+
+            <form
+              v-if="`${this.user.id}` !== `${this.currentUserId}`"
+              v-on:submit.prevent="createConversation()"
+            >
+              <div class="w-100 border-top border-bottom">
+                <textarea
+                  placeholder="Write a message…"
+                  class="form-control border-0 p-3 shadow-none"
+                  rows="2"
+                  v-model="newMessageBody"
+                ></textarea>
+              </div>
+              <div class="p-3 d-flex align-items-center">
+                <div class="overflow-hidden"></div>
+                <span class="ml-auto">
+                  <button type="submit" class="btn btn-primary btn-sm rounded">
+                    <i class="feather-send"></i> Send
+                  </button>
+                </span>
+              </div>
+            </form>
+
+            <!-- End Send Message me -->
           </main>
           <!-- End Center Column -->
 
@@ -640,26 +581,16 @@ export default {
       user: {},
       listings: [],
       conversations: [],
+      newMessageBody: "",
       urls: [],
       toggle: false,
       currentUserId: localStorage.getItem("user_id"),
+      newConversationId: "",
     };
   },
 
   created: function () {
     this.showUser();
-
-    // Grab conversations
-    axios
-      .get("/conversations")
-      .then((response) => {
-        console.log(response.data);
-        this.conversations = response.data;
-      })
-      .catch((error) => {
-        this.errors = error.response.data.errors;
-      });
-    // End grab conversations
   },
 
   methods: {
@@ -668,9 +599,72 @@ export default {
         this.user = response.data;
         this.listings = response.data.listings;
         this.urls = response.data.personal_urls;
-        // console.log(response.data);
+        console.log(this.currentUserId);
       });
+    },
+
+    conversationsIndex: function () {
+      axios
+        .get("/conversations")
+        .then((response) => {
+          // console.log(response.data);
+          this.conversations = response.data;
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+        });
+    },
+
+    createConversation: function () {
+      var conversationParams = {
+        sender_id: this.currentUserId,
+        receiver_id: this.user.id,
+      };
+      axios
+        .post(`/conversations`, conversationParams)
+        .then((response) => {
+          console.log(response.data);
+          this.newConversationId = response.data.id;
+          var params = {
+            user_id: this.currentUserId,
+            body: this.newMessageBody,
+            conversation_id: this.newConversationId,
+          };
+          axios
+            .post("/messages", params)
+            .then((response) => {
+              console.log(response.data);
+              this.newMessageBody = "";
+            })
+            .catch((error) => {
+              this.errors = error.response.data.errors;
+              console.log(this.errors);
+            });
+          this.$router.push(`/conversations/${this.newConversationId}`);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          console.log(this.errors);
+        });
     },
   },
 };
+
+// HOLD ON TO THIS FOR A MIN
+// createMessage: function () {
+//   var params = {
+//     user_id: this.currentUserId,
+//     body: this.newMessageBody,
+//   };
+//   axios
+//     .post("/messages", params)
+//     .then((response) => {
+//       console.log(response.data);
+//       this.newMessageBody = "";
+//     })
+//     .catch((error) => {
+//       this.errors = error.response.data.errors;
+//       console.log(this.errors);
+//     });
+// },
 </script>
