@@ -11,15 +11,21 @@
 
         <ul class="navbar-nav ml-auto d-flex align-items-center">
           <!-- 'Messages' icon start -->
+
           <li
             v-if="isLoggedIn()"
             class="nav-item dropdown no-arrow mx-1 osahan-list-dropdown"
           >
-            <router-link class="nav-link dropdown-toggle" to="/conversations">
+            <router-link
+              v-if="`${this.conversations.length}`"
+              class="nav-link dropdown-toggle"
+              to="/conversations"
+            >
               <i class="feather-message-square mr-2"></i>
               Messages
             </router-link>
           </li>
+
           <!-- 'Messages' icon end -->
 
           <!-- Basic navigation start -->
@@ -63,9 +69,19 @@
 <style></style>
 
 <script>
+import axios from "axios";
+
 export default {
   data: function () {
-    return {};
+    return {
+      conversations: [],
+      currentUserId: "",
+    };
+  },
+
+  created: function () {
+    this.getUserId();
+    this.showUser();
   },
 
   methods: {
@@ -74,6 +90,13 @@ export default {
     },
     getUserId: function () {
       return localStorage.getItem("user_id");
+    },
+
+    showUser: function () {
+      var currentUserId = localStorage.getItem("user_id");
+      axios.get(`/users/${currentUserId}`).then((response) => {
+        this.conversations = response.data;
+      });
     },
   },
 };

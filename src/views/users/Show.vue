@@ -591,6 +591,7 @@ export default {
 
   created: function () {
     this.showUser();
+    this.conversationsIndex();
   },
 
   methods: {
@@ -599,7 +600,8 @@ export default {
         this.user = response.data;
         this.listings = response.data.listings;
         this.urls = response.data.personal_urls;
-        console.log(this.currentUserId);
+        // this.conversations = response.data.conversations;
+        console.log(response.data);
       });
     },
 
