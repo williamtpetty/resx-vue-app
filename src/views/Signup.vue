@@ -1,56 +1,5 @@
 <template>
   <div class="signup">
-    <!-- <form v-on:submit.prevent="submit()">
-      <h1>Signup</h1>
-
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-          {{ error }}
-        </li>
-      </ul>
-
-      <div class="form-group">
-        <label>First Name: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="newUserParams.first_name"
-        />
-      </div>
-      <div class="form-group">
-        <label>Last Name: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="newUserParams.last_name"
-        />
-      </div>
-      <div class="form-group">
-        <label>Email: </label>
-        <input
-          type="email"
-          class="form-control"
-          v-model="newUserParams.email"
-        />
-      </div>
-      <div class="form-group">
-        <label>Password: </label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="newUserParams.password"
-        />
-      </div>
-      <div class="form-group">
-        <label>Password confirmation: </label>
-        <input
-          type="password"
-          class="form-control"
-          v-model="newUserParams.password_confirmation"
-        />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
-    </form> -->
     <!-- Begin Header -->
     <div class="py-5 bg-secondary">
       <div class="container">
@@ -67,9 +16,7 @@
     <!-- Begin signup -->
     <div class="bg-white">
       <div class="container">
-        <div
-          class="row justify-content-center align-items-center d-flex vh-100"
-        >
+        <div class="row justify-content-center align-items-center d-flex">
           <div class="col-md-4 mx-auto">
             <div class="osahan-login py-4">
               <div class="text-center mb-4">

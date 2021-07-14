@@ -210,19 +210,18 @@
                     >
                       Add Your Link
                     </button>
+                    <!-- findme -->
                     <div class="row">
-                      <div
-                        class="col-md-4 mb-3"
-                        v-for="url in urls"
-                        v-bind:key="url.id"
-                      >
-                        <p>{{ url }}</p>
+                      <div class="" v-for="url in urls" v-bind:key="url.id">
+                        <p>{{ url.personal_url }}</p>
+                        <button v-on:click="destroyUrl(url)">Remove</button>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
+
             <!-- End peronsal URLs -->
 
             <!-- Disclaimers -->
@@ -268,10 +267,17 @@ export default {
 
   methods: {
     showUser: function () {
-      axios.get(`/users/${this.$route.params.id}`).then((response) => {
-        this.editUserParams = response.data;
-        console.log(this.editUserParams);
-      });
+      axios
+        .get(`/users/${this.$route.params.id}`)
+        .then((response) => {
+          this.editUserParams = response.data;
+          this.urls = response.data.personal_urls;
+          console.log(this.urls);
+        })
+        .catch((error) => {
+          this.errors = error.response.data.errors;
+          console.log(this.errors);
+        });
     },
 
     addUrl: function (pushUrlParameter) {
@@ -302,11 +308,12 @@ export default {
         })
         .catch((error) => {
           this.errors = error.response.data.errors;
+          console.log(this.errors);
         });
     },
 
     destroyUser: function () {
-      if (confirm("Are you sure you want to leave us?"))
+      if (confirm("Are you sure you want to leave us?")) {
         axios
           .delete(`/users/${this.$route.params.id}`)
           .then((response) => {
@@ -319,6 +326,27 @@ export default {
           .catch((error) => {
             console.log(error.response);
           });
+      }
+    },
+
+    destroyUrl: function (deleteThisUrl) {
+      // parameter is image object
+      console.log(deleteThisUrl.id);
+      if (confirm("Are you sure you want to delete this URL?")) {
+        axios
+          .delete(`/personal_urls/${deleteThisUrl.id}`) // should render the images id
+          .then((response) => {
+            var urlIndex = this.urls.indexOf(deleteThisUrl);
+            //assigns image index to var
+            this.urls.splice(urlIndex, 1);
+            // splices image at index, removes 1 element from array
+            console.log(response.data);
+          })
+          .catch((error) => {
+            this.errors = error.response.data.errors;
+            console.log(this.errors);
+          });
+      }
     },
   },
 };

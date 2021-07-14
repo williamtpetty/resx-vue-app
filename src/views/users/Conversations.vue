@@ -227,18 +227,6 @@ export default {
       console.log(this.conversations);
     });
 
-    // Don't think I need this
-    // axios
-    //   .get(`/conversations/${this.$route.params.id}`)
-    //   .then((response) => {
-    //     this.conversation = response.data;
-    //     console.log(this.conversation);
-    //   })
-    //   .catch((error) => {
-    //     this.errors = error.response.data.errors;
-    //     console.log(this.errors);
-    //   });
-
     var cable = ActionCable.createConsumer("ws://localhost:3000/cable");
     cable.subscriptions.create("MessagesChannel", {
       connected: () => {

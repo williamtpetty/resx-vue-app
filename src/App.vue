@@ -59,7 +59,7 @@
           </li>
           <li class="nav-item">
             <router-link class="nav-link" v-if="isLoggedIn()" to="/logout"
-              ><i class="feather-book mr-1"></i
+              ><i class="feather-users mr-1"></i
               ><span class="d-none d-lg-inline">Logout</span></router-link
             >
           </li>

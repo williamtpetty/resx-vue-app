@@ -1,72 +1,5 @@
 <template>
   <div class="listings-edit">
-    <!-- <form v-on:submit.prevent="editListing()">
-      <ul>
-        <li class="text-danger" v-for="error in errors" v-bind:key="error">
-          {{ error }}
-        </li>
-      </ul>
-
-      <div class="form-group">
-        <label>Title: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="editListingParams.title"
-        />
-      </div>
-      <div class="form-group">
-        <label>Description </label>
-        <textarea
-          type="text"
-          class="form-control"
-          v-model="editListingParams.description"
-        ></textarea>
-      </div>
-      <div class="form-group">
-        <label>Address: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="editListingParams.address"
-        />
-      </div>
-      <div class="form-group">
-        <label>Availability: </label>
-        <textarea
-          type="text"
-          class="form-control"
-          v-model="editListingParams.availability"
-        ></textarea>
-      </div>
-      <div class="form-group">
-        <label>Price: </label>
-        <input
-          type="text"
-          class="form-control"
-          v-model="editListingParams.price"
-        />
-      </div>
-      <input type="submit" class="btn btn-primary" value="Submit" />
-    </form>
-    <div>
-      <button v-on:click="destroyListing()">Delete Listing</button>
-    </div>
-    <div>
-      <label>Image: </label>
-      <input type="text" v-model="newImage.url" />
-      
-      <button v-on:click="addImage(newImage)">Add Image</button>
-      <div v-for="image in images" v-bind:key="image.id">
-        <p>
-          {{ image.id }}
-          <img :src="`${image.url}`" alt="" />
-          <br />
-          <button v-on:click="destroyImage(image)">Delete Image</button>
-          passing image object as parameter to function
-        </p>
-      </div>
-    </div> -->
     <!-- Begin Header -->
     <div class="py-5 bg-secondary">
       <div class="container">
@@ -197,6 +130,9 @@
                     >
                       Add Image
                     </button>
+                    <div class="small text-gray-500">
+                      Click on image to delete
+                    </div>
                     <div class="row">
                       <div
                         class="col-md-4 mb-3"
@@ -204,6 +140,7 @@
                         v-bind:key="image.id"
                       >
                         <img
+                          v-on:click="destroyImage(image)"
                           class="card-img-top"
                           :src="`${image.url}`"
                           alt="Card image cap"
