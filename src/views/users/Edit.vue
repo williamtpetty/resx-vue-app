@@ -14,7 +14,7 @@
     </div>
     <!-- End Header -->
     <!-- Begin form -->
-    <div class="bg-light">
+    <div class="bg-white">
       <div class="container">
         <!-- <div
           class="row justify-content-center align-items-center d-flex vh-100"
@@ -210,11 +210,18 @@
                     >
                       Add Your Link
                     </button>
-                    <!-- findme -->
                     <div class="row">
+                      <div class="small text-gray-500">
+                        Click on link to delete social media url
+                      </div>
                       <div class="" v-for="url in urls" v-bind:key="url.id">
-                        <p>{{ url.personal_url }}</p>
-                        <button v-on:click="destroyUrl(url)">Remove</button>
+                        <button
+                          type="button"
+                          class="btn btn-link"
+                          v-on:click="destroyUrl(url)"
+                        >
+                          {{ url.personal_url }}
+                        </button>
                       </div>
                     </div>
                   </div>

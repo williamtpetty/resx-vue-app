@@ -13,7 +13,7 @@
       </div>
     </div>
     <!-- End Header -->
-    <div class="py-4">
+    <div class="py-4 bg-light bg-gradient">
       <div class="d-flex justify-content-center container">
         <div class="row">
           <!-- Main Content -->
@@ -125,7 +125,7 @@
                       osahan-chat-box
                       p-3
                       border-top border-bottom
-                      bg-light
+                      bg-white
                     "
                   >
                     <!-- Begin first message to loop on -->

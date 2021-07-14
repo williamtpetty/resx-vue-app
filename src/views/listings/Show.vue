@@ -44,7 +44,7 @@
       </div>
     </div>
     <!-- End Header -->
-    <div class="py-5 bg-light">
+    <div class="py-5 bg-light bg-gradient">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-md-8">
@@ -122,7 +122,7 @@
                 </h6>
                 <h6 class="font-weight-light">{{ listing.description }}</h6>
               </div>
-              <div class="card-footer border-0">
+              <div class="card-footer border-0 bg-white border-top">
                 <div class="footer">
                   <span>Listing User:</span>
                   <router-link v-bind:to="`/users/${user.id}`">

@@ -14,7 +14,7 @@
     </div> -->
     <!-- End Header -->
 
-    <div class="py-4">
+    <div class="py-4 bg-light bg-gradient">
       <div class="container">
         <div class="row">
           <!-- Begin Left Hand column -->

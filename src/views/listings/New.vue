@@ -64,8 +64,8 @@
     <!-- End Header -->
 
     <!-- Begin Form -->
-    <div class="bg-light">
-      <div class="container bg-light">
+    <div class="bg-white">
+      <div class="container">
         <!-- <div
           class="row justify-content-center align-items-center d-flex vh-100"
         > -->
