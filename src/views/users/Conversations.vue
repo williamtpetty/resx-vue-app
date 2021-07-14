@@ -39,12 +39,12 @@
                         border-bottom
                       "
                     >
-                      <i class="feather-search position-absolute"></i>
+                      <!-- <i class="feather-search position-absolute"></i>
                       <input
                         placeholder="Search messages"
                         type="text"
                         class="form-control"
-                      />
+                      /> -->
                     </div>
                     <div class="osahan-chat-list">
                       <!-- Begin lefthand messages section -->
@@ -227,18 +227,18 @@ export default {
       console.log(this.conversations);
     });
 
-    axios
-      .get(`/conversations/${this.$route.params.id}`)
-      .then((response) => {
-        this.conversation = response.data;
-        console.log(this.conversation);
-      })
-      .catch((error) => {
-        this.errors = error.response.data.errors;
-        console.log(this.errors);
-      });
+    // Don't think I need this
+    // axios
+    //   .get(`/conversations/${this.$route.params.id}`)
+    //   .then((response) => {
+    //     this.conversation = response.data;
+    //     console.log(this.conversation);
+    //   })
+    //   .catch((error) => {
+    //     this.errors = error.response.data.errors;
+    //     console.log(this.errors);
+    //   });
 
-    // Messages Push
     var cable = ActionCable.createConsumer("ws://localhost:3000/cable");
     cable.subscriptions.create("MessagesChannel", {
       connected: () => {
@@ -250,11 +250,11 @@ export default {
       },
       received: (data) => {
         // Called when there's incoming data on the websocket for this channel
-        // console.log("Data from MessagesChannel:", data);
+        console.log("Data from MessagesChannel:", data);
         this.conversation.messages.push(data); // update the messages in real time
+        this.conversations.messages.push(data); // update the messages in real time
       },
     });
-    // End messages push
   },
 
   methods: {
