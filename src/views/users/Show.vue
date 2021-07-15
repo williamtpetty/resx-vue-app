@@ -577,7 +577,6 @@ import axios from "axios";
 export default {
   data: function () {
     return {
-      message: "User Show Page",
       user: {},
       listings: [],
       conversations: [],
@@ -617,9 +616,46 @@ export default {
         });
     },
 
+    // These two methods below are the front end logic for updating the create method on the back end
+    // createConversation: function () {
+    //   var conversationParams = {
+    //     receiver_id: this.user.id,
+    //   };
+    //   axios
+    //     .post(`/conversations`, conversationParams)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       this.newConversationId = response.data.id;
+    //       this.$router.push(`/conversations/${this.newConversationId}`);
+    //       setTimeout(function () {
+    //         this.createMessage();
+    //       }, 1000);
+    //     })
+    //     .catch((error) => {
+    //       this.errors = error.response.data.errors;
+    //       console.log(this.errors);
+    //     });
+    // },
+
+    // createMessage: function () {
+    //   var params = {
+    //     body: this.newMessageBody,
+    //   };
+    //   axios
+    //     .post("/messages", params)
+    //     .then((response) => {
+    //       console.log(response.data);
+    //       this.newMessageBody = "";
+    //     })
+    //     .catch((error) => {
+    //       this.errors = error.response.data.errors;
+    //       console.log(this.errors);
+    //     });
+    // },
+    // End front end logic, comment out the nested axios method below to test again.
+
     createConversation: function () {
       var conversationParams = {
-        sender_id: this.currentUserId,
         receiver_id: this.user.id,
       };
       axios
@@ -651,22 +687,4 @@ export default {
     },
   },
 };
-
-// HOLD ON TO THIS FOR A MIN
-// createMessage: function () {
-//   var params = {
-//     user_id: this.currentUserId,
-//     body: this.newMessageBody,
-//   };
-//   axios
-//     .post("/messages", params)
-//     .then((response) => {
-//       console.log(response.data);
-//       this.newMessageBody = "";
-//     })
-//     .catch((error) => {
-//       this.errors = error.response.data.errors;
-//       console.log(this.errors);
-//     });
-// },
 </script>
