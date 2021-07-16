@@ -57,11 +57,24 @@
                           v-for="image in images"
                           v-bind:key="image.id"
                         >
-                          <img
-                            class="card-img-top"
-                            :src="`${image.url}`"
-                            alt="Card image cap"
-                          />
+                          <div>
+                            <!-- findme -->
+                            <img
+                              v-on:click="imageShow(image)"
+                              class="card-img-top image-size"
+                              :src="image.url"
+                              alt="Card image cap"
+                            />
+                            <dialog id="photo-details" class="border-0">
+                              <form method="dialog">
+                                <img :src="`${currentImage.url}`" />
+                                <br />
+                                <button class="btn btn-primary modal-button">
+                                  Close
+                                </button>
+                              </form>
+                            </dialog>
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -250,6 +263,16 @@
   width: 100%;
   height: 600px;
 }
+
+.modal-button {
+  margin-top: 10px;
+}
+
+.image-size {
+  height: 250px;
+  object-fit: cover;
+  cursor: pointer;
+}
 </style>
 
 <script>
@@ -262,6 +285,7 @@ export default {
       message: "Listing Show Page",
       listing: [],
       images: [],
+      currentImage: {},
       user: {},
       currentUserId: localStorage.getItem("user_id"),
     };
@@ -272,6 +296,11 @@ export default {
   },
 
   methods: {
+    imageShow: function (image) {
+      this.currentImage = image;
+      document.querySelector("#photo-details").showModal();
+    },
+
     listingsShow: function () {
       axios
         .get(`/listings/${this.$route.params.id}`)

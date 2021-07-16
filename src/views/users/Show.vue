@@ -35,7 +35,7 @@
               <div class="py-4 px-3 border-bottom">
                 <img
                   :src="`${user.image_url}`"
-                  class="img-fluid mt-2 rounded-circle"
+                  class="img-fluid mt-2 rounded-circle aspect"
                   alt="Responsive image"
                 />
                 <h5 class="font-weight-bold text-dark mb-1 mt-4">
@@ -570,7 +570,13 @@
   </div>
 </template>
 
-<style></style>
+<style>
+.aspect {
+  height: 200px;
+  width: 200px;
+  object-fit: cover;
+}
+</style>
 
 <script>
 import axios from "axios";

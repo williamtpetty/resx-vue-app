@@ -98,7 +98,7 @@
                     <router-link v-bind:to="`/users/${listing.user.id}`">
                       <p class="mb-0">
                         <img
-                          class="rounded-circle"
+                          class="rounded-circle thumbnail"
                           :src="`${listing.user.image_url}`"
                           alt="Card image cap"
                         />
@@ -124,6 +124,11 @@
 .image-fit {
   height: 300px;
   object-fit: cover;
+}
+
+.thumbnail {
+  height: 33px;
+  width: 33px;
 }
 </style>
 
