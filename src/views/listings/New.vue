@@ -72,7 +72,7 @@
         <div class="col-md-4 mx-auto">
           <div class="osahan-login py-4">
             <div class="text-center mb-4">
-              <a href="/"><img src="/img/logo.svg" alt="" /></a>
+              <a href="/"><img src="/img/logo-duck.jpeg" alt="" /></a>
               <h5 class="font-weight-bold mt-3">New Listing</h5>
             </div>
             <form v-on:submit.prevent="newListing()">

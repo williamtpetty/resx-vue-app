@@ -3,9 +3,9 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand navbar-light bg-white osahan-nav-top p-0">
       <div class="container">
-        <!-- THIS IS THAT UGLY ASS CROWN LEFT SIDE -->
+        <!-- THIS IS THAT UGLY ASS CROWN -->
         <a class="navbar-brand mr-2" href="/"
-          ><img src="/img/logo.svg" alt="" />
+          ><img src="/img/logo-duck.jpeg" alt="" />
         </a>
         <!-- CHANGE THAT UGLY ASS CROWN -->
 
