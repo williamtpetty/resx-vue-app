@@ -6,8 +6,10 @@ import Vue2Filters from "vue2-filters";
 
 Vue.use(Vue2Filters);
 
-axios.defaults.baseURL =
-  process.env.NODE_ENV === "build" ? "https://resxleasing.herokuapp.com/" : "/";
+// axios.defaults.baseURL =
+//   process.env.NODE_ENV === "development" ? "http://localhost:3000" : "/";
+
+axios.defaults.baseURL = "https://resxleasing.herokuapp.com";
 
 var jwt = localStorage.getItem("jwt");
 if (jwt) {
