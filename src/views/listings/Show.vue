@@ -303,7 +303,7 @@ export default {
 
     listingsShow: function () {
       axios
-        .get(`/listings/${this.$route.params.id}`)
+        .get(`listings/${this.$route.params.id}`)
         .then((response) => {
           console.log(response.data);
           this.listing = response.data;

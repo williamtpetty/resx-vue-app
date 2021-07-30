@@ -131,7 +131,7 @@ export default {
   methods: {
     submit: function () {
       axios
-        .post("/users", this.newUserParams)
+        .post("users", this.newUserParams)
         .then((response) => {
           console.log(response.data);
           var params = {
@@ -139,7 +139,7 @@ export default {
             password: this.newUserParams.password,
           };
           axios
-            .post("/sessions", params)
+            .post("sessions", params)
             .then((response) => {
               axios.defaults.headers.common["Authorization"] =
                 "Bearer " + response.data.jwt;
@@ -148,7 +148,7 @@ export default {
               localStorage.setItem("user_id", response.data.user_id);
               //uses localStorage.getItem to retrieve the id
               this.$router.push(
-                `/users/${localStorage.getItem("user_id")}/edit`
+                `users/${localStorage.getItem("user_id")}/edit`
               );
             })
             .catch((error) => {

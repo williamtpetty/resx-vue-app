@@ -189,10 +189,10 @@ export default {
   methods: {
     newListing: function () {
       axios
-        .post(`/listings`, this.newListingParams)
+        .post(`listings`, this.newListingParams)
         .then((response) => {
           console.log(response.data);
-          this.$router.push(`/listings/${response.data.id}/edit`);
+          this.$router.push(`listings/${response.data.id}/edit`);
         })
         .catch((error) => {
           this.errors = error.response.data.errors;

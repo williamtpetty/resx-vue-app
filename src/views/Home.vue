@@ -112,13 +112,13 @@ export default {
         password: this.password,
       };
       axios
-        .post("/sessions", params)
+        .post("sessions", params)
         .then((response) => {
           axios.defaults.headers.common["Authorization"] =
             "Bearer " + response.data.jwt;
           localStorage.setItem("jwt", response.data.jwt);
           localStorage.setItem("user_id", response.data.user_id);
-          this.$router.push("/listings");
+          this.$router.push("listings");
         })
         .catch((error) => {
           console.log(error.response);
