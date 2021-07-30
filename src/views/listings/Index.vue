@@ -156,7 +156,7 @@ export default {
   methods: {
     listingsIndex: function () {
       axios
-        .get("/listings")
+        .get("https://resxleasing.herokuapp.com/listings")
         .then((response) => {
           this.listings = response.data;
           console.log(this.listings);
