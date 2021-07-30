@@ -189,7 +189,7 @@ export default {
   methods: {
     showListing: function () {
       axios
-        .get(`listings/${this.$route.params.id}`)
+        .get(`/listings/${this.$route.params.id}`)
         .then((response) => {
           this.editListingParams = response.data;
           this.images = response.data.images;
@@ -205,7 +205,7 @@ export default {
       // determines if images array has a length, if not, errors
       if (this.images.length) {
         axios
-          .patch(`listings/${this.$route.params.id}`, this.editListingParams)
+          .patch(`/listings/${this.$route.params.id}`, this.editListingParams)
           .then((response) => {
             console.log(response.data);
             this.$router.push("/listings");
@@ -222,7 +222,7 @@ export default {
 
     addImage: function (addOneImage) {
       axios
-        .post(`images`, { listing_id: this.listingId, url: this.newImage.url })
+        .post(`/images`, { listing_id: this.listingId, url: this.newImage.url })
         .then((response) => {
           this.images.push(addOneImage);
           console.log(response.data);
@@ -238,7 +238,7 @@ export default {
       console.log(deleteThisImage.id);
       if (confirm("Are you sure you want to delete this image?")) {
         axios
-          .delete(`images/${deleteThisImage.id}`) // should render the images id
+          .delete(`/images/${deleteThisImage.id}`) // should render the images id
           .then((response) => {
             var imageIndex = this.images.indexOf(deleteThisImage);
             //assigns image index to var
@@ -255,10 +255,10 @@ export default {
     destroyListing: function () {
       if (confirm("Are you sure you want to delete this listing?")) {
         axios
-          .delete(`listings/${this.$route.params.id}`)
+          .delete(`/listings/${this.$route.params.id}`)
           .then((response) => {
             console.log(response);
-            this.$router.push("listings");
+            this.$router.push("/listings");
           })
           .catch((error) => {
             console.log(error.response);
